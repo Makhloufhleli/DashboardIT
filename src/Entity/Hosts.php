@@ -57,25 +57,27 @@ class Hosts
      */
     private $cdn;
 
-    /**
-     * @ORM\Column(type="array")
-     */
-    private $sites = [];
 
-    /**
-     * @ORM\Column(type="array")
-     */
-    private $databasesLinks = [];
-
-    /**
-     * @ORM\Column(type="array")
-     */
-    private $backups = [];
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $apache_nginx;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $sites = [];
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $databasesLinks = [];
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $backups = [];
 
     public function getId(): ?int
     {
@@ -178,12 +180,26 @@ class Hosts
         return $this;
     }
 
+   
+
+    public function getApacheNginx(): ?string
+    {
+        return $this->apache_nginx;
+    }
+
+    public function setApacheNginx(string $apache_nginx): self
+    {
+        $this->apache_nginx = $apache_nginx;
+
+        return $this;
+    }
+
     public function getSites(): ?array
     {
         return $this->sites;
     }
 
-    public function setSites(array $sites): self
+    public function setSites(?array $sites): self
     {
         $this->sites = $sites;
 
@@ -195,7 +211,7 @@ class Hosts
         return $this->databasesLinks;
     }
 
-    public function setDatabasesLinks(array $databasesLinks): self
+    public function setDatabasesLinks(?array $databasesLinks): self
     {
         $this->databasesLinks = $databasesLinks;
 
@@ -207,21 +223,9 @@ class Hosts
         return $this->backups;
     }
 
-    public function setBackups(array $backups): self
+    public function setBackups(?array $backups): self
     {
         $this->backups = $backups;
-
-        return $this;
-    }
-
-    public function getApacheNginx(): ?string
-    {
-        return $this->apache_nginx;
-    }
-
-    public function setApacheNginx(string $apache_nginx): self
-    {
-        $this->apache_nginx = $apache_nginx;
 
         return $this;
     }

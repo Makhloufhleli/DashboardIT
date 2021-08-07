@@ -88,6 +88,10 @@ class AccountsManagers
         $this->billingServers = new ArrayCollection();
     }
 
+    public function __toString(){
+        return(String) $this->getName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

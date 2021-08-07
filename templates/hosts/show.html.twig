@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hosts{% endblock %}
+
+{% block body %}
+    <h1>Hosts</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ host.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ host.name }}</td>
+            </tr>
+            <tr>
+                <th>PhpVersion</th>
+                <td>{{ host.phpVersion }}</td>
+            </tr>
+            <tr>
+                <th>DiscSpace</th>
+                <td>{{ host.discSpace }}</td>
+            </tr>
+            <tr>
+                <th>Certificate</th>
+                <td>{{ host.certificate }}</td>
+            </tr>
+            <tr>
+                <th>Cdn</th>
+                <td>{{ host.cdn }}</td>
+            </tr>
+            <tr>
+                <th>Sites</th>
+                <td>{{ host.sites ? host.sites|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DatabasesLinks</th>
+                <td>{{ host.databasesLinks ? host.databasesLinks|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Backups</th>
+                <td>{{ host.backups ? host.backups|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Apache_nginx</th>
+                <td>{{ host.apacheNginx }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('hosts_index') }}">back to list</a>
+
+    <a href="{{ path('hosts_edit', {'id': host.id}) }}">edit</a>
+
+    {{ include('hosts/_delete_form.html.twig') }}
+{% endblock %}
