@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hosts index{% endblock %}
+
+{% block body %}
+    <h1>Hosts index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>PhpVersion</th>
+                <th>DiscSpace</th>
+                <th>Certificate</th>
+                <th>Cdn</th>
+                <th>Sites</th>
+                <th>DatabasesLinks</th>
+                <th>Backups</th>
+                <th>Apache_nginx</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for host in hosts %}
+            <tr>
+                <td>{{ host.id }}</td>
+                <td>{{ host.name }}</td>
+                <td>{{ host.phpVersion }}</td>
+                <td>{{ host.discSpace }}</td>
+                <td>{{ host.certificate }}</td>
+                <td>{{ host.cdn }}</td>
+                <td>{{ host.sites ? host.sites|join(', ') : '' }}</td>
+                <td>{{ host.databasesLinks ? host.databasesLinks|join(', ') : '' }}</td>
+                <td>{{ host.backups ? host.backups|join(', ') : '' }}</td>
+                <td>{{ host.apacheNginx }}</td>
+                <td>
+                    <a href="{{ path('hosts_show', {'id': host.id}) }}">show</a>
+                    <a href="{{ path('hosts_edit', {'id': host.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('hosts_new') }}">Create new</a>
+{% endblock %}

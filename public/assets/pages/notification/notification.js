@@ -26,7 +26,6 @@ $(window).on('load',function(){
     };
 
    
-        notify('Welcome to Notification page', 'inverse');
    
 });
 
@@ -38,11 +37,11 @@ $(document).ready(function() {
     /*
      * Notifications
      */
-    function notify(from, align, icon, type, animIn, animOut){
+    function notify(from, align, icon, type, animIn, animOut, title, message){
         $.growl({
             icon: icon,
-            title: ' Bootstrap Growl ',
-            message: 'Turning standard Bootstrap alerts into awesome notifications',
+            title: title,
+            message: message,
             url: ''
         },{
             element: 'body',
@@ -88,8 +87,10 @@ $(document).ready(function() {
         var nType = $(this).attr('data-type');
         var nAnimIn = $(this).attr('data-animation-in');
         var nAnimOut = $(this).attr('data-animation-out');
+        var nTitle = $(this).attr('data-title');
+        var nMessage = $(this).attr('data-message');
 
-        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
+        notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut, nTitle, nMessage);
     });
 
 });

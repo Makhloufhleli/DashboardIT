@@ -79,10 +79,6 @@ class Servers
      */
     private $operatingSystem;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Clients::class, mappedBy="server")
-     */
-    private $client;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -114,9 +110,15 @@ class Servers
      */
     private $apache_nginx;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="servers")
+     */
+    private $client;
+
+   
+
     public function __construct()
     {
-        $this->client = new ArrayCollection();
         $this->projects = new ArrayCollection();
     }
 
@@ -268,37 +270,7 @@ class Servers
 
         return $this;
     }
-
-    /**
-     * @return Collection|Clients[]
-     */
-    public function getClient(): Collection
-    {
-        return $this->client;
-    }
-
-    public function addClient(Clients $client): self
-    {
-        if (!$this->client->contains($client)) {
-            $this->client[] = $client;
-            $client->setServer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClient(Clients $client): self
-    {
-        if ($this->client->removeElement($client)) {
-            // set the owning side to null (unless already changed)
-            if ($client->getServer() === $this) {
-                $client->setServer(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getCpu(): ?string
     {
         return $this->cpu;
@@ -385,6 +357,18 @@ class Servers
     public function setApacheNginx(string $apache_nginx): self
     {
         $this->apache_nginx = $apache_nginx;
+
+        return $this;
+    }
+
+    public function getClient(): ?Clients
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Clients $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

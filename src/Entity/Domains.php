@@ -27,10 +27,6 @@ class Domains
      */
     private $creationDate;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Clients::class, cascade={"persist", "remove"})
-     */
-    private $client;
 
     /**
      * @ORM\OneToOne(targetEntity=Projects::class, cascade={"persist", "remove"})
@@ -73,6 +69,11 @@ class Domains
      */
     private $billingManager;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="domains")
+     */
+    private $client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,18 +99,6 @@ class Domains
     public function setCreationDate(\DateTimeInterface $creationDate): self
     {
         $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    public function getClient(): ?Clients
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Clients $client): self
-    {
-        $this->client = $client;
 
         return $this;
     }
@@ -206,6 +195,18 @@ class Domains
     public function setBillingManager(?AccountsManagers $billingManager): self
     {
         $this->billingManager = $billingManager;
+
+        return $this;
+    }
+
+    public function getClient(): ?Clients
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Clients $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
