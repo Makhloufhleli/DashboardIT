@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clients{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/component.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/notification/notification.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/animate.css/css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/demo.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/j-pro-modern.css') }}">
+
+{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <ul class="notifications" id="alert">
+            <li>
+                <button hidden id="alert_btn_success" class="btn btn-primary waves-effect" data-type="success" data-animation-in="animated bounceInRight" data-animation-out="animated bounceOutRight" data-title="Success! " data-message="{{ message }}">Bounce In Right</button>
+            </li>
+        </ul>
+    {% endfor %}
+    <div class="page-wrapper">
+        <div class="page-header">
+            <div class="page-header-title">
+                <h4>Clients</h4>
+            </div>
+            <div class="page-header-breadcrumb">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('dashboard') }}">
+                            <i class="icofont icofont-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Clients</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-body">
+            <div class="row">
+                <div class="col col-lg-12">
+                    <div class="card ">
+                        <div class="card-header">
+                            <h5>Details of client: {{ client.name }}</h5>
+
+                            <a class="badge badge-info btn f-right"
+                               href="{{ path('clients_index') }}">
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-lg-12 col-xl-12">                                       
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs  tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#servers" role="tab">Servers</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#domains" role="tab">Domains</a>
+                                        </li>
+
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content tabs card-block">
+                                        <div class="tab-pane active" id="servers" role="tabpanel">
+                                            <div class="row">
+                                                {% for server in client.servers %}
+                                                    <div class="col-lg-6 users-card">
+                                                        <div class="card user-card">
+                                                            <div class="card-header">
+                                                                <span class="label label-default f-left"> Server name: </span>
+                                                                <a href="">
+                                                                    {{ server.name }}
+                                                                </a>
+                                                            </div>
+                                                            <div class="card-block">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="card user-card">
+                                                                            <div class="card-header">
+                                                                                Projects associated with this server:
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <div class="row">
+                                                                                    {% for project in server.projects %}
+
+                                                                                        <div class="col-lg-6">
+                                                                                            <span class="badge badge-info waves-effect">  {{ project.name }}</span>
+                                                                                        </div>
+
+                                                                                    {% endfor %}
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="domains" role="tabpanel">
+                                            {% for domain in client.domains %}
+                                                <div class="col-lg-6 users-card">
+                                                    <div class="card user-card">
+                                                        <div class="card-header">
+                                                            <span class="label label-default f-left"> Domain name: </span>
+                                                            <a href="">
+                                                                {{ domain.name }}
+                                                            </a>
+                                                        </div>
+                                                        <div class="card-block">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="card user-card">
+                                                                        <div class="card-header">
+                                                                            Project associated with this domain:
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <h6>
+                                                                                    {{ domain.project.name }}
+                                                                                </h6>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/data-table/js/data-table-custom.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('assets/bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/modalEffects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/classie.js') }}"></script>
+
+    <script>
+        $("#alert").ready(function(){
+            $("#alert_btn_success").click();
+        });
+    </script>
+
+{% endblock %}

@@ -47,24 +47,31 @@
                     <div class="card info-colorr">
                         <div class="card-header">
                             <h5>Edit {{ project.name }}</h5>
-                            <a href="{{ path('projects_index') }}">
-                                <button type="button" class="btn btn-info btn-outline-info btn-round f-right mr-lg-3">
-                                    <i class="fa fa-arrow-circle-left"></i>
-                                </button>
+                            <a class="badge badge-info btn f-right"
+                               href="{{ path('projects_index') }}">
+                                <i class="fa fa-arrow-left"></i>
                             </a>
                         </div>
                         <div class="card-block">
                             <div class="j-wrapper j-wrapper-640">
                                 {{ form_start(form, {attr: {'class':'j-pro', 'novalidate':''}}) }}
                                 <div class="j-content">
-                                    <div class="j-unit">
-                                        <label class="j-label">Name</label>
-                                        <div class="j-input">
-                                            <label class="j-icon-right" for="name">
-                                                <i class="icofont icofont-ui-user"></i>
-                                            </label>
-                                            {{ form_widget(form.name) }}
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Name</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.name) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Project name</span>
+                                            </div>
                                         </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Server</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.server) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Server</span>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="j-footer">

@@ -49,6 +49,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->id;
     }
+    
+    public function __toString() {
+        return (String) $this->getFirstName()." ".$this->getLastName();
+    }
 
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead

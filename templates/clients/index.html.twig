@@ -37,7 +37,7 @@
                     </li>
                     <li class="breadcrumb-item"><a href="#!">Pages</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#!">Configuration</a>
+                    <li class="breadcrumb-item"><a href="#!">Clients</a>
                     </li>
                 </ul>
             </div>
@@ -49,11 +49,12 @@
                         <div class="card-header">
                             <h5>Clients</h5>
 
-                            <a class="badge badge-primary btn f-right"
+                            <a class="badge badge-info btn f-right"
                                href="Javascript:void();" 
                                data-toggle="modal" 
                                data-target="#large-Modal">
-                                <i class="icon-plus"></i>
+                                <i class="fa fa-user f-right"></i>
+                                <i class="fa fa-plus"></i>
                             </a>
                         </div>
                         <div class="card-block">
@@ -105,6 +106,11 @@
                                                 <td>{{ client.name }}</td>
                                                 <td>
                                                     <div class="row f-right">
+                                                        <div class="col">
+                                                            <a class="badge badge-default btn" href="{{ path('clients_show', {'id': client.id}) }}">
+                                                                <i class="icofont icofont-eye"></i>
+                                                            </a>
+                                                        </div>
                                                         <!-- edit section start -->
                                                         <div class="col">
                                                             <a href="{{ path('clients_edit', {'id': client.id}) }}" class="badge badge-info btn">
@@ -130,7 +136,7 @@
                                                                                                     <div class="col col-sm-4">
 
                                                                                                         <h3>
-                                                                                                            Really you want to delete {{ client.name }}
+                                                                                                            Sure you want to delete {{ client.name }}
                                                                                                             <i class="icofont icofont-warning-alt text-warning"></i>
                                                                                                         </h3>
                                                                                                     </div>
@@ -159,6 +165,7 @@
                                                         </div>
                                                         <!-- delete section end -->
                                                     </div>
+                                                    
                                                 </td>
                                             </tr>
                                         {% endfor %}

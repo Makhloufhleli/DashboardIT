@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Domains index{% endblock %}
+
+{% block body %}
+    <h1>Domains index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>CreationDate</th>
+                <th>RegistrAr</th>
+                <th>RegistrAnt</th>
+                <th>Ns1</th>
+                <th>Ns2</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for domain in domains %}
+            <tr>
+                <td>{{ domain.id }}</td>
+                <td>{{ domain.name }}</td>
+                <td>{{ domain.creationDate ? domain.creationDate|date('Y-m-d') : '' }}</td>
+                <td>{{ domain.registrAr }}</td>
+                <td>{{ domain.registrAnt }}</td>
+                <td>{{ domain.ns1 }}</td>
+                <td>{{ domain.ns2 }}</td>
+                <td>
+                    <a href="{{ path('domains_show', {'id': domain.id}) }}">show</a>
+                    <a href="{{ path('domains_edit', {'id': domain.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('domains_new') }}">Create new</a>
+{% endblock %}

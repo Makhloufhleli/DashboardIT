@@ -16,6 +16,18 @@ class UserType extends AbstractType
             ->add('username')
             ->add('firstName')
             ->add('lastName')
+                ->add('roles',ChoiceType::class,[
+                'multiple'=>true,
+                'expanded'=>true,
+                'choices'=>[
+                    'Admin'=>'ROLE_ADMIN',
+                    'User'=>'ROLE_USER'
+                ],
+                'label'=> FALSE,
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ])
         ;
     }
 

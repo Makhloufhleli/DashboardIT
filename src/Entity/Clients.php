@@ -41,6 +41,10 @@ class Clients
         $this->servers = new ArrayCollection();
         $this->domains = new ArrayCollection();
     }
+    
+    public function __toString() {
+        return (String) $this->getName();
+    }
 
 
     public function getId(): ?int

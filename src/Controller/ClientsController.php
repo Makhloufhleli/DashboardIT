@@ -41,6 +41,16 @@ class ClientsController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
+    /**
+     * @Route("/{id}", name="clients_show", methods={"GET"})
+     */
+    public function show(Clients $client): Response
+    {
+        return $this->render('clients/show.html.twig', [
+            'client' => $client,
+        ]);
+    }
 
     /**
      * @Route("/{id}/edit", name="clients_edit", methods={"GET","POST"})

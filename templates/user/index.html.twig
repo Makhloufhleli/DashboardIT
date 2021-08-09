@@ -49,11 +49,12 @@
                         <div class="card-header">
                             <h5>Users</h5>
 
-                            <a class="badge badge-primary btn f-right"
+                            <a class="badge badge-info btn f-right"
                                href="Javascript:void();" 
                                data-toggle="modal" 
                                data-target="#large-Modal">
-                                <i class="icon-plus"></i>
+                                <i class="fa fa-user f-right"></i>
+                                <i class="fa fa-plus"></i>
                             </a>
                         </div>
                         <div class="card-block">
@@ -94,6 +95,15 @@
                                                                     <i class="icofont icofont-ui-user"></i>
                                                                 </label>
                                                                 {{ form_widget(form.lastName) }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="j-unit">
+                                                            <label class="j-label">Roles</label>
+                                                            <div class="j-input">
+                                                                <label class="j-icon-right" for="roles">
+                                                                    <i class="icofont icofont-ui-lock"></i>
+                                                                </label>
+                                                                {{ form_widget(form.roles) }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -158,7 +168,7 @@
                                                                                                     <div class="col col-sm-4">
 
                                                                                                         <h3>
-                                                                                                            Really you want to delete {{ user.firstName }} {{ user.lastName }}
+                                                                                                            Sure you want to delete {{ user.firstName }} {{ user.lastName }}
                                                                                                             <i class="icofont icofont-warning-alt text-warning"></i>
                                                                                                         </h3>
                                                                                                     </div>

@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Servers{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/component.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/notification/notification.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/animate.css/css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/demo.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/j-pro-modern.css') }}">
+
+{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <ul class="notifications" id="alert">
+            <li>
+                <button hidden id="alert_btn_success" class="btn btn-primary waves-effect" data-type="success" data-animation-in="animated bounceInRight" data-animation-out="animated bounceOutRight" data-title="Success! " data-message="{{ message }}">Bounce In Right</button>
+            </li>
+        </ul>
+    {% endfor %}
+    <div class="page-wrapper">
+        <div class="page-header">
+            <div class="page-header-title">
+                <h4>Servers</h4>
+            </div>
+            <div class="page-header-breadcrumb">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('dashboard') }}">
+                            <i class="icofont icofont-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Servers</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-body">
+            <div class="row">
+                <div class="col col-lg-12">
+                    <div class="card ">
+                        <div class="card-header">
+                            <h5>Details of server: </h5><label class="text-info"><strong>{{ server.name }}</strong></label>
+                            <a class="badge badge-info btn f-right"
+                               href="{{ path('servers_index') }}">
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-lg-12 col-xl-12">                                       
+                                    <div class="row">
+                                        <div class="col-lg-4 users-card">
+                                            <div class="card user-card">
+                                                <div class="card-header">
+                                                    General informations
+                                                </div>
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <ul>
+                                                                <li>Client: {{ server.client }}</li>
+                                                                <li>Type: {{ server.type }}</li>
+                                                                <li>Model: {{ server.model }}</li>
+                                                                <li>region: {{ server.region }}</li>
+                                                                <li>Data center: {{ server.dataCenter }}</li>
+                                                                <li>Subscrition: {{ server.subscription }}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-lg-4 users-card">
+                                            <div class="card user-card">
+                                                <div class="card-header">
+                                                    Technical informations
+                                                </div>
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <ul>
+                                                                <li>IP Adress: {{ server.ipAdress }}</li>
+                                                                <li>Operating system: {{ server.operatingSystem }}</li>
+                                                                <li>CPU: {{ server.cpu }}</li>
+                                                                <li>RAM: {{ server.ram }}</li>
+                                                                <li>Disk: {{ server.discSpace }}</li>
+                                                                <li>Extra disk: {{ server.extraDisc }}</li>
+                                                                <li>Embedded WEB server: {{ server.apacheNginx }}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                                            
+                                        <div class="col-lg-4 users-card">
+                                            <div class="card user-card">
+                                                <div class="card-header">
+                                                    Managers
+                                                </div>
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <ul>
+                                                                <li>Admin: {{ server.adminManager }}</li>
+                                                                <li>Technical manager: {{ server.technicalManager }}</li>
+                                                                <li>Billing manager: {{ server.billingManager }}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                                            
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/data-table/js/data-table-custom.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('assets/bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/modalEffects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/classie.js') }}"></script>
+
+    <script>
+        $("#alert").ready(function(){
+            $("#alert_btn_success").click();
+        });
+    </script>
+
+{% endblock %}

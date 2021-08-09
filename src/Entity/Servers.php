@@ -50,7 +50,7 @@ class Servers
     private $ipAdress;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $projectPublicCloud;
 
@@ -70,7 +70,7 @@ class Servers
     private $dataCenter;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $subscription;
 
@@ -115,11 +115,20 @@ class Servers
      */
     private $client;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $identifier;
+
    
 
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+    }
+    
+    public function __toString() {
+        return (String) $this->getName();
     }
 
     public function getId(): ?int
@@ -369,6 +378,18 @@ class Servers
     public function setClient(?Clients $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(string $identifier): self
+    {
+        $this->identifier = $identifier;
 
         return $this;
     }

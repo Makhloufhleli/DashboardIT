@@ -49,11 +49,12 @@
                         <div class="card-header">
                             <h5>Accounts managers</h5>
 
-                            <a class="badge badge-primary btn f-right"
+                            <a class="badge badge-info btn f-right"
                                href="Javascript:void();" 
                                data-toggle="modal" 
                                data-target="#large-Modal">
-                                <i class="icon-plus"></i>
+                                <i class="fa fa-user f-right"></i>
+                                <i class="fa fa-plus"></i>
                             </a>
                         </div>
                         <div class="card-block">
@@ -82,7 +83,7 @@
                                                             <label class="j-label">Function</label>
                                                             <div class="j-input">
                                                                 <label class="j-icon-right" for="function">
-                                                                    <i class="icofont icofont-ui-lock"></i>
+                                                                    <i class="fa fa-gears"></i>
                                                                 </label>
                                                                 {{ form_widget(form.function) }}
                                                             </div>
@@ -113,9 +114,26 @@
                                         {% for manager in accounts_managers %}
                                             <tr>
                                                 <td>{{ manager.name }}</td>
-                                                <td>{{ manager.function }}</td>
+                                                <td>
+                                                    {% if manager.function == 'adminManager' %}
+                                                        Admin
+                                                    {% elseif manager.function == 'technicalManager' %}
+                                                        Technical manager
+                                                    {% elseif manager.function == 'billingManager' %}
+                                                        Billing manager
+                                                    {% else %}
+                                                        <p class="text-warning">This manager dosen't have any function</p>
+                                                    {% endif %}
+                                                </td>
                                                 <td>
                                                     <div class="row f-right">
+                                                        <!-- details section start -->
+                                                        <div class="col">
+                                                            <a class="badge badge-default btn" href="Javascript:void();" data-toggle="modal" data-target="#details-Modal{{ manager.id }}">
+                                                                <i class="icofont icofont-eye"></i>
+                                                            </a>
+                                                        </div>
+                                                        <!-- details section end -->
                                                         <!-- edit section start -->
                                                         <div class="col">
                                                             <a href="{{ path('accounts_managers_edit', {'id': manager.id}) }}" class="badge badge-info btn">
@@ -170,24 +188,319 @@
                                                         </div>
                                                         <!-- delete section end -->
                                                     </div>
+
+                                                    <!-- start details modal -->
+                                                    <div class="modal fade md-effect-5" id="details-Modal{{manager.id}}" tabindex="-1" role="dialog">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h5>Details manager: {{ manager.name }}</h5>
+                                                                        {% if manager.function == 'adminManager' %}
+                                                                            <p class="badge badge-info">Admin</p>
+                                                                        {% elseif manager.function == 'technicalManager' %}
+                                                                            <p class="badge badge-info">Technical manager</p>
+                                                                        {% elseif manager.function == 'billingManager' %}
+                                                                            <p class="badge badge-info">Billing manager</p>
+                                                                        {% else %}
+                                                                            <p class="badge badge-warning">This manager dosen't have any function</p>
+                                                                        {% endif %}
+                                                                        <a class="badge btn-outline-danger btn f-right"
+                                                                           href="Javascript:void();" 
+                                                                           data-dismiss="modal">
+                                                                            <i class="fa fa-close"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="card-block">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-12">
+
+                                                                                <div class="row">
+
+                                                                                    {% if manager.function == 'adminManager' %}
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Servers
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for server in manager.adminServers %}
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ server.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Domains
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for domain in manager.adminDomains %}                                                                                                                                                                                                                                      
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ domain.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Web hosts
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for host in manager.adminHosts %}                                                                                                                                                                                                                                      
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ host.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    {% endif %}
+
+                                                                                    {% if manager.function == 'technicalManager' %}
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Servers
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for server in manager.technicalServers %}
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ server.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Domains
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for domain in manager.technicalDomains %}                                                                                                                                                                                                                                      
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ domain.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Web hosts
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for host in manager.technicalHosts %}                                                                                                                                                                                                                                      
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ host.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    {% endif %}
+                                                                                    {% if manager.function == 'billingManager' %}
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Servers
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for server in manager.billingServers %}
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ server.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Domains
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for domain in manager.billingDomains %}                                                                                                                                                                                                                                      
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ domain.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-lg-3">
+                                                                                            <div class="card card-border-default">
+                                                                                                <div class="card-header">
+                                                                                                    Web hosts
+                                                                                                </div>
+                                                                                                <div class="card-block">
+                                                                                                    <div class="row">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <div class="task-board">
+                                                                                                                <table class="table-bordered">
+                                                                                                                    <tbody>
+                                                                                                                        {% for host in manager.billingHosts %}                                                                                                                                                                                                                                      
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <a href="#">
+                                                                                                                                        {{ host.name }}
+                                                                                                                                    </a>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                        {% endfor %}
+                                                                                                                    </tbody>
+                                                                                                                </table>                                                                                                                
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>                                                                                            
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    {% endif %}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- end details modal -->
                                                 </td>
                                             </tr>
                                         {% endfor %}
-
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 {% endblock %}
-
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>

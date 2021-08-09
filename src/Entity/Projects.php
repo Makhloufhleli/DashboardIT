@@ -31,6 +31,10 @@ class Projects
     {
         return $this->id;
     }
+    
+    public function __toString() {
+        return (String) $this->getName();
+    }
 
     public function getName(): ?string
     {
