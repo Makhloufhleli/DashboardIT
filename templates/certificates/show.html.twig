@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Clients{% endblock %}
+{% block title %}Certificates{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/demo.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/j-pro-modern.css') }}">
+
 {% endblock %}
 
 {% block body %}
@@ -25,7 +26,7 @@
     <div class="page-wrapper">
         <div class="page-header">
             <div class="page-header-title">
-                <h4>Clients</h4>
+                <h4>Certificates</h4>
             </div>
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
@@ -36,7 +37,7 @@
                     </li>
                     <li class="breadcrumb-item"><a href="#!">Pages</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#!">Clients</a>
+                    <li class="breadcrumb-item"><a href="#!">Certificates</a>
                     </li>
                 </ul>
             </div>
@@ -44,32 +45,49 @@
         <div class="page-body">
             <div class="row">
                 <div class="col col-lg-12">
-                    <div class="card info-colorr">
+                    <div class="card ">
                         <div class="card-header">
-                            <h5>Edit {{ client.name }}</h5>
+                            <h5>Details of certificate: </h5>
                             <a class="badge badge-info btn f-right"
-                               href="{{ path('clients_index') }}">
+                               href="{{ path('certificates_index') }}">
                                 <i class="fa fa-arrow-left"></i>
                             </a>
                         </div>
                         <div class="card-block">
-                            <div class="j-wrapper j-wrapper-640">
-                                {{ form_start(form, {attr: {'class':'j-pro', 'novalidate':''}}) }}
-                                <div class="j-content">
-                                    <div class="j-unit">
-                                        <label class="j-label">Name</label>
-                                        <div class="j-input">
-                                            <label class="j-icon-right" for="name">
-                                                <i class="icofont icofont-ui-user"></i>
-                                            </label>
-                                            {{ form_widget(form.name) }}
-                                        </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-xl-12">                                       
+                                    <div class="row">
+                                        <div class="col-lg-12 users-card">
+                                            <div class="card user-card">
+                                                <div class="card-header">
+                                                    General informations
+                                                </div>
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <ul>
+                                                                <li><strong>Domain: </strong>{{ certificate.domain.name }}</li>
+                                                                <li><strong>Renewal mode:</strong> 
+                                                                    {% if certificate.renewalMode == 'auto' %}
+                                                                        <label class="badge badge-success btn">Auto</label>
+                                                                    {% else %}
+                                                                        <label class="badge badge-warning btn">Manual</label>
+                                                                    {% endif %}
+                                                                </li>
+                                                                <li><strong>Creation date:</strong> {{ certificate.creationDate ? certificate.creationDate|date('d/m/Y') : ''  }}</li>
+                                                                <li><strong>Renewal date:</strong> {{ certificate.renewalDate ? certificate.creationDate|date('d/m/Y') : '' }}</li>
+                                                                <li><strong>Owner:</strong> {{ certificate.owner }}</li>
+                                                                <li><strong>Issuer:</strong> {{ certificate.issuer }}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>               
                                     </div>
                                 </div>
-                                <div class="j-footer">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light ">Save</button>
-                                </div>
-                                {{ form_end(form) }}
+
                             </div>
                         </div>
                     </div>

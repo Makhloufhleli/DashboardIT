@@ -74,6 +74,17 @@ class Domains
      */
     private $client;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hasCertificate;
+    
+
+    public function __construct() {
+        $this->hasCertificate = false;
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -211,6 +222,18 @@ class Domains
     public function setClient(?Clients $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getHasCertificate(): ?bool
+    {
+        return $this->hasCertificate;
+    }
+
+    public function setHasCertificate(bool $hasCertificate): self
+    {
+        $this->hasCertificate = $hasCertificate;
 
         return $this;
     }

@@ -23,19 +23,11 @@ class Certificates
     private $domain;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $projects = [];
-
-    /**
      * @ORM\Column(type="date")
      */
     private $creationDate;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $renewalDate;
+    
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -51,6 +43,12 @@ class Certificates
      * @ORM\Column(type="string", length=255)
      */
     private $issuer;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $renewalDate;
+
 
     public function getId(): ?int
     {
@@ -69,18 +67,6 @@ class Certificates
         return $this;
     }
 
-    public function getProjects(): ?array
-    {
-        return $this->projects;
-    }
-
-    public function setProjects(?array $projects): self
-    {
-        $this->projects = $projects;
-
-        return $this;
-    }
-
     public function getCreationDate(): ?\DateTimeInterface
     {
         return $this->creationDate;
@@ -93,17 +79,7 @@ class Certificates
         return $this;
     }
 
-    public function getRenewalDate(): ?\DateTimeInterface
-    {
-        return $this->renewalDate;
-    }
-
-    public function setRenewalDate(\DateTimeInterface $renewalDate): self
-    {
-        $this->renewalDate = $renewalDate;
-
-        return $this;
-    }
+    
 
     public function getRenewalMode(): ?string
     {
@@ -140,4 +116,14 @@ class Certificates
 
         return $this;
     }
+
+    function getRenewalDate() {
+        return $this->renewalDate;
+    }
+
+    function setRenewalDate($renewalDate): void {
+        $this->renewalDate = $renewalDate;
+    }
+
+
 }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Domains{% endblock %}
+{% block title %}Certificates{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -25,7 +25,7 @@
     <div class="page-wrapper">
         <div class="page-header">
             <div class="page-header-title">
-                <h4>Domains</h4>
+                <h4>Certificates</h4>
             </div>
             <div class="page-header-breadcrumb">
                 <ul class="breadcrumb-title">
@@ -36,7 +36,7 @@
                     </li>
                     <li class="breadcrumb-item"><a href="#!">Pages</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#!">Domains</a>
+                    <li class="breadcrumb-item"><a href="#!">Certificates</a>
                     </li>
                 </ul>
             </div>
@@ -46,9 +46,9 @@
                 <div class="col col-lg-12">
                     <div class="card info-colorr">
                         <div class="card-header">
-                            <h5>Edit {{ domain.name }}</h5>
+                            <h5>Edit certificate</h5>
                             <a class="badge badge-info btn f-right"
-                               href="{{ path('domains_index') }}">
+                               href="{{ path('certificates_index') }}">
                                 <i class="fa fa-arrow-left"></i>
                             </a>
                         </div>
@@ -58,93 +58,54 @@
                                 <div class="j-content">
                                     <div class="j-row">
                                         <div class="j-span6 j-unit">
-                                            <label class="j-label">Name</label>
+                                            <label class="j-label">Domain</label>
                                             <div class="j-input">
-                                                {{ form_widget(form.name) }}
-                                                <span class="j-tooltip j-tooltip-right-top">Domain name (URL)</span>
+                                                {{ form_widget(form.domain) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Domain</span>
                                             </div>
                                         </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Renewal mode</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.renewalMode) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Renewal mode</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="j-row">
                                         <div class="j-span6 j-unit">
                                             <label class="j-label">Creation date</label>
                                             <div class="j-input">
                                                 {{ form_widget(form.creationDate) }}
-                                                <span class="j-tooltip j-tooltip-right-top">Domain creation date</span>
+                                                <span class="j-tooltip j-tooltip-right-top">Creation date</span>
+                                            </div>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Renewal date</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.renewalDate) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Renewal date</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="j-row">
                                         <div class="j-span6 j-unit">
-                                            <label class="j-label">RegistrAr</label>
+                                            <label class="j-label">Owner</label>
                                             <div class="j-input">
-                                                {{ form_widget(form.registrAr) }}
-                                                <span class="j-tooltip j-tooltip-right-top">RegistrAr</span>
+                                                {{ form_widget(form.owner) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Owner name</span>
                                             </div>
                                         </div>
                                         <div class="j-span6 j-unit">
-                                            <label class="j-label">RegistrAnt</label>
+                                            <label class="j-label">Issuer</label>
                                             <div class="j-input">
-                                                {{ form_widget(form.registrAnt) }}
-                                                <span class="j-tooltip j-tooltip-right-top">RegistrAnt</span>
+                                                {{ form_widget(form.issuer) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Issuer name</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="j-divider j-gap-bottom-25"></div>
-                                    <div class="j-row">
-                                        <div class="j-span6 j-unit">
-                                            <label class="j-label">NS 01</label>
-                                            <div class="j-input">
-                                                {{ form_widget(form.ns1) }}
-                                                <span class="j-tooltip j-tooltip-right-top">NS 01</span>
-                                            </div>
-                                        </div>
-                                        <div class="j-span6 j-unit">
-                                            <label class="j-label">NS 02</label>
-                                            <div class="j-input">
-                                                {{ form_widget(form.ns2) }}
-                                                <span class="j-tooltip j-tooltip-right-top">NNS 02</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="j-row">
-                                        <div class="j-span6 j-unit">
-                                            <label class="j-label">Project</label>
-                                            <div class="j-input">
-                                                {{ form_widget(form.project) }}
-                                                <span class="j-tooltip j-tooltip-right-top">Project associated</span>
-                                            </div>
-                                        </div>
-                                        <div class="j-span6 j-unit">
-                                            <label class="j-label">Client</label>
-                                            <div class="j-input">
-                                                {{ form_widget(form.client) }}
-                                                <span class="j-tooltip j-tooltip-right-top">Client associated</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="j-divider j-gap-bottom-25"></div>
-                                    <div class="j-row">
-                                        <div class="j-span4 j-unit">
-                                            <label class="j-label">Admin</label>
-                                            <div class="j-input">
-                                                {{ form_widget(form.adminManager) }}
-                                                <span class="j-tooltip j-tooltip-right-top">Administration manager</span>
-                                            </div>
-                                        </div>
-                                        <div class="j-span4 j-unit">
-                                            <label class="j-label">Technical manager</label>
-                                            <div class="j-input">
-                                                {{ form_widget(form.technicalManager) }}
-                                                <span class="j-tooltip j-tooltip-right-top">Technical administration manager</span>
-                                            </div>
-                                        </div>
-                                        <div class="j-span4 j-unit">
-                                            <label class="j-label">Billing manager</label>
-                                            <div class="j-input">
-                                                {{ form_widget(form.billingManager) }}
-                                                <span class="j-tooltip j-tooltip-right-top">Billing dministration manager</span>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="j-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>

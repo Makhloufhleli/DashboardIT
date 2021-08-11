@@ -16,20 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class DomainsController extends AbstractController
 {
     /**
-     * @Route("/", name="domains_index", methods={"GET"})
+     * @Route("/", name="domains_index", methods={"GET","POST"})
      */
-    public function index(DomainsRepository $domainsRepository): Response
-    {
-        return $this->render('domains/index.html.twig', [
-            'domains' => $domainsRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="domains_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
+    public function index(
+        DomainsRepository $domainsRepository,
+        Request $request
+    ): Response{
         $domain = new Domains();
         $form = $this->createForm(DomainsType::class, $domain);
         $form->handleRequest($request);
@@ -38,15 +30,17 @@ class DomainsController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($domain);
             $entityManager->flush();
-
+            $this->addFlash('success',$domain->getName().' Successfuly added! ');
             return $this->redirectToRoute('domains_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->renderForm('domains/new.html.twig', [
+        
+        return $this->render('domains/index.html.twig', [
+            'domains' => $domainsRepository->findAll(),
             'domain' => $domain,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/{id}", name="domains_show", methods={"GET"})
@@ -68,7 +62,7 @@ class DomainsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success',$domain->getName().' Successfuly updated! ');
             return $this->redirectToRoute('domains_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -87,6 +81,7 @@ class DomainsController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($domain);
             $entityManager->flush();
+            $this->addFlash('success',$domain->getName().' Successfuly deleted! ');
         }
 
         return $this->redirectToRoute('domains_index', [], Response::HTTP_SEE_OTHER);

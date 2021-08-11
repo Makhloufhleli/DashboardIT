@@ -37,7 +37,7 @@
                     </li>
                     <li class="breadcrumb-item"><a href="#!">Pages</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#!">Configuration</a>
+                    <li class="breadcrumb-item"><a href="#!">Accounts managers</a>
                     </li>
                 </ul>
             </div>
@@ -226,21 +226,12 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for server in manager.adminServers %}
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ server.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for server in manager.adminServers %}
+
+                                                                                                                    <li class="text-dark">   {{ server.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            
@@ -255,21 +246,13 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for domain in manager.adminDomains %}                                                                                                                                                                                                                                      
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ domain.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for domain in manager.adminDomains %}
+
+                                                                                                                    <li class="text-dark">   {{ domain.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
+                                                                                                            
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            
@@ -283,21 +266,13 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for host in manager.adminHosts %}                                                                                                                                                                                                                                      
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ host.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for host in manager.adminHosts %} 
+
+                                                                                                                    <li class="text-dark">   {{ host.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
+                                                                                                            
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            
@@ -314,21 +289,12 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for server in manager.technicalServers %}
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ server.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for server in manager.technicalServers %}
+
+                                                                                                                    <li class="text-dark">   {{ server.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            
@@ -343,21 +309,13 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for domain in manager.technicalDomains %}                                                                                                                                                                                                                                      
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ domain.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for domain in manager.technicalDomains %}
+
+                                                                                                                    <li class="text-dark">   {{ domain.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
+                                                                                                            
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            
@@ -371,21 +329,13 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for host in manager.technicalHosts %}                                                                                                                                                                                                                                      
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ host.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for host in manager.technicalHosts %} 
+
+                                                                                                                    <li class="text-dark">   {{ host.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
+                                                                                                            
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            
@@ -401,21 +351,12 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for server in manager.billingServers %}
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ server.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for server in manager.billingServers %}
+
+                                                                                                                    <li class="text-dark">   {{ server.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            
@@ -430,21 +371,13 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for domain in manager.billingDomains %}                                                                                                                                                                                                                                      
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ domain.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for domain in manager.billingDomains %}
+
+                                                                                                                    <li class="text-dark">   {{ domain.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
+                                                                                                            
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            
@@ -458,21 +391,12 @@
                                                                                                 <div class="card-block">
                                                                                                     <div class="row">
                                                                                                         <div class="col-sm-12">
-                                                                                                            <div class="task-board">
-                                                                                                                <table class="table-bordered">
-                                                                                                                    <tbody>
-                                                                                                                        {% for host in manager.billingHosts %}                                                                                                                                                                                                                                      
-                                                                                                                            <tr>
-                                                                                                                                <td>
-                                                                                                                                    <a href="#">
-                                                                                                                                        {{ host.name }}
-                                                                                                                                    </a>
-                                                                                                                                </td>
-                                                                                                                            </tr>
-                                                                                                                        {% endfor %}
-                                                                                                                    </tbody>
-                                                                                                                </table>                                                                                                                
-                                                                                                            </div>
+                                                                                                            <ul class="f-left">
+                                                                                                                {% for host in manager.billingHosts %} 
+                                                                                                                    <li class="text-dark">   {{ host.name }}</li>
+                                                                                                                {% endfor %}
+                                                                                                            </ul>
+                                                                                                            
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>                                                                                            

@@ -80,10 +80,10 @@
                                             <i class="ti-fullscreen"></i>
                                         </a>
                                     </li>
-                                    
+
                                 </ul>
                                 <ul class="nav-right">
-                                    
+
                                     <li class="header-notification">
                                         <a href="#!">
                                             <i class="ti-bell"></i>
@@ -126,7 +126,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    
+
                                     <li class="user-profile header-notification">
                                         <a href="#!">
                                             <img src="{{ asset('assets/images/user.png') }}" alt="User-Profile-Image">
@@ -168,7 +168,7 @@
                                         <input class="morphsearch-input" type="search" placeholder="Search..." />
                                         <button class="morphsearch-submit" type="submit">Search</button>
                                     </form>
-                                    
+
                                     <!-- /morphsearch-content -->
                                     <span class="morphsearch-close"><i class="icofont icofont-search-alt-1"></i></span>
                                 </div>
@@ -206,137 +206,156 @@
                                 </div>
                                 <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation" menu-title-theme="theme5">Navigation</div>
                                 <ul class="pcoded-item pcoded-left-item">
-                                    <li class="active">
-                                        <a href="{{ path('dashboard') }}">
-                                            <span class="pcoded-micon"><i class="ti-dashboard"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="{{ path('servers_index') }}">
-                                            <span class="pcoded-micon"><i class="fa fa-server"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.widget.main">Servers</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="#">
-                                            <span class="pcoded-micon"><i class="ti-world"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.widget.main">Domains</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="#">
-                                            <span class="pcoded-micon"><i class="ti-cloud"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.widget.main">Hosts</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li class=" ">
-                                        <a href="#">
-                                            <span class="pcoded-micon"><i class="fa fa-certificate"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.widget.main">Certificates</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                    </li>
-                                    <li class="pcoded-hasmenu">
-                                        <a href="javascript:void(0)">
-                                            <span class="pcoded-micon"><i class="ti-settings"></i></span>
-                                            <span class="pcoded-mtext" data-i18n="nav.widget.main">Config</span>
-                                            <span class="pcoded-mcaret"></span>
-                                        </a>
-                                        <ul class="pcoded-submenu">
-                                            <li class="">
-                                                <a href="{{ path('clients_index') }}">
-                                                    <span class="pcoded-micon"><i class="icon-user"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.dash.default">Clients</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="{{ path('accounts_managers_index') }}">
-                                                    <span class="pcoded-micon"><i class="icon-user"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.dash.default">Accounts managers</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="{{ path('projects_index') }}">
-                                                    <span class="pcoded-micon"><i class="icon-user"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.dash.default">Projects</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="{{ path('user_index') }}">
-                                                    <span class="pcoded-micon"><i class="icon-user"></i></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.dash.default">Users</span>
-                                                    <span class="pcoded-mcaret"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                        <li {% if app.request.attributes.get('_route') == 'dashboard' %} class="active" {% endif %}>
+                                            <a href="{{ path('dashboard') }}">
+                                                <span class="pcoded-micon"><i class="ti-dashboard"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li {% if app.request.attributes.get('_route') == 'servers_index' %} class="active" {% endif %}>
+                                            <a href="{{ path('servers_index') }}">
+                                                <span class="pcoded-micon"><i class="fa fa-server"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.widget.main">Servers</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li {% if app.request.attributes.get('_route') == 'domains_index' %} class="active" {% endif %}>
+                                            <a href="{{ path('domains_index') }}">
+                                                <span class="pcoded-micon"><i class="ti-world"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.widget.main">Domains</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li {% if app.request.attributes.get('_route') == 'hosts_index' %} class="active" {% endif %}>
+                                            <a href="{{ path('hosts_index') }}">
+                                                <span class="pcoded-micon"><i class="ti-cloud"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.widget.main">Hosts</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li {% if app.request.attributes.get('_route') == 'certificates_index' %} class="active" {% endif %}>
+                                            <a href="{{ path('certificates_index') }}">
+                                                <span class="pcoded-micon"><i class="fa fa-certificate"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.widget.main">Certificates</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="
+                                                pcoded-hasmenu
+                                                
+                                                {% if 
+                                                    app.request.attributes.get('_route') == 'clients_index'  %} 
+                                                    pcoded-trigger active 
+                                                {% endif %}
+                                                {% if 
+                                                    app.request.attributes.get('_route') == 'accounts_managers_index'  %} 
+                                                    pcoded-trigger active 
+                                                {% endif %}
+                                                {% if 
+                                                    app.request.attributes.get('_route') == 'projects_index'  %} 
+                                                    pcoded-trigger active 
+                                                {% endif %}
+                                                {% if 
+                                                    app.request.attributes.get('_route') == 'user_index'  %} 
+                                                    pcoded-trigger active 
+                                                {% endif %}
+                                            ">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-micon"><i class="ti-settings"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.widget.main">Config</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li {% if app.request.attributes.get('_route') == 'clients_index' %} class="active" {% endif %}>
+                                                    <a href="{{ path('clients_index') }}">
+                                                        <span class="pcoded-micon"><i class="icon-user"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.dash.default">Clients</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li {% if app.request.attributes.get('_route') == 'accounts_managers_index' %} class="active" {% endif %}>
+                                                    <a href="{{ path('accounts_managers_index') }}">
+                                                        <span class="pcoded-micon"><i class="icon-user"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.dash.default">Accounts managers</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li {% if app.request.attributes.get('_route') == 'projects_index' %} class="active" {% endif %}>
+                                                    <a href="{{ path('projects_index') }}">
+                                                        <span class="pcoded-micon"><i class="icon-user"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.dash.default">Projects</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                                <li {% if app.request.attributes.get('_route') == 'user_index' %} class="active" {% endif %}>
+                                                    <a href="{{ path('user_index') }}">
+                                                        <span class="pcoded-micon"><i class="icon-user"></i></span>
+                                                        <span class="pcoded-mtext" data-i18n="nav.dash.default">Users</span>
+                                                        <span class="pcoded-mcaret"></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
 
-                            </div>
-                        </nav>
-                        <div class="pcoded-content">
-                            <div class="pcoded-inner-content">
+                                </div>
+                            </nav>
+                            <div class="pcoded-content">
+                                <div class="pcoded-inner-content">
 
-                                <div class="main-body">
+                                    <div class="main-body">
 
-                                    {% block body %}{% endblock %}
+                                        {% block body %}{% endblock %}
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% block javascripts %}
-            <script type="text/javascript" src="{{ asset('assets/bower_components/jquery/js/jquery.min.js') }}"></script>
-            <script src="{{ asset('assets/bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/popper.js/js/popper.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/bootstrap/js/bootstrap.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/modernizr/js/modernizr.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/modernizr/js/css-scrollbars.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/classie/js/classie.js') }}"></script>
-            <script src="{{ asset('assets/bower_components/d3/js/d3.js') }}"></script>
-            <script src="{{ asset('assets/bower_components/rickshaw/js/rickshaw.js') }}"></script>
-            <script src="{{ asset('assets/bower_components/raphael/js/raphael.min.js') }}"></script>
-            <script src="{{ asset('assets/bower_components/morris.js/js/morris.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/pages/dashboard/horizontal-timeline/js/main.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/pages/dashboard/amchart/js/amcharts.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/pages/dashboard/amchart/js/serial.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/pages/dashboard/amchart/js/light.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/pages/dashboard/amchart/js/custom-amchart.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/i18next/js/i18next.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-i18next/js/jquery-i18next.min.js') }}"></script>
+            {% block javascripts %}
+                <script type="text/javascript" src="{{ asset('assets/bower_components/jquery/js/jquery.min.js') }}"></script>
+                <script src="{{ asset('assets/bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/popper.js/js/popper.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/bootstrap/js/bootstrap.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/modernizr/js/modernizr.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/modernizr/js/css-scrollbars.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/classie/js/classie.js') }}"></script>
+                <script src="{{ asset('assets/bower_components/d3/js/d3.js') }}"></script>
+                <script src="{{ asset('assets/bower_components/rickshaw/js/rickshaw.js') }}"></script>
+                <script src="{{ asset('assets/bower_components/raphael/js/raphael.min.js') }}"></script>
+                <script src="{{ asset('assets/bower_components/morris.js/js/morris.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/pages/dashboard/horizontal-timeline/js/main.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/pages/dashboard/amchart/js/amcharts.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/pages/dashboard/amchart/js/serial.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/pages/dashboard/amchart/js/light.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/pages/dashboard/amchart/js/custom-amchart.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/i18next/js/i18next.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/jquery-i18next/js/jquery-i18next.min.js') }}"></script>
 
-            <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
-            <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
-            <script src="{{ asset('assets/js/demo-12.js') }}"></script>
-            <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-            <script src="{{ asset('assets/js/jquery.mousewheel.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
+                <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
+                <script src="{{ asset('assets/js/demo-12.js') }}"></script>
+                <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+                <script src="{{ asset('assets/js/jquery.mousewheel.min.js') }}"></script>
 
-            <!-- notifications scripts -->
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.desktop.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.buttons.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.confirm.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.callbacks.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.animate.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.history.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.mobile.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.nonblock.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/js/bootstrap-growl.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('assets/pages/notification/notification.js') }}"></script>
-        {% endblock %}
-    </body>
-</html>
+                <!-- notifications scripts -->
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.desktop.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.buttons.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.confirm.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.callbacks.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.animate.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.history.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.mobile.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/bower_components/pnotify/js/pnotify.nonblock.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/js/bootstrap-growl.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('assets/pages/notification/notification.js') }}"></script>
+            {% endblock %}
+        </body>
+    </html>

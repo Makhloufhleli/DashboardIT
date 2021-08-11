@@ -16,35 +16,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class HostsController extends AbstractController
 {
     /**
-     * @Route("/", name="hosts_index", methods={"GET"})
+     * @Route("/", name="hosts_index", methods={"GET","POST"})
      */
-    public function index(HostsRepository $hostsRepository): Response
-    {
-        return $this->render('hosts/index.html.twig', [
-            'hosts' => $hostsRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="hosts_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
+    public function index(HostsRepository $hostsRepository,Request $request): Response
     {
         $host = new Hosts();
         $form = $this->createForm(HostsType::class, $host);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($host);
             $entityManager->flush();
-
+            $this->addFlash('success', $host->getName().' successfuly added! ');
             return $this->redirectToRoute('hosts_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->renderForm('hosts/new.html.twig', [
+        
+        return $this->render('hosts/index.html.twig', [
+            'hosts' => $hostsRepository->findAll(),
             'host' => $host,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -68,7 +58,7 @@ class HostsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', $host->getName().' successfuly updated! ');
             return $this->redirectToRoute('hosts_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -87,6 +77,7 @@ class HostsController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($host);
             $entityManager->flush();
+            $this->addFlash('success', $host->getName().' successfuly deleted! ');
         }
 
         return $this->redirectToRoute('hosts_index', [], Response::HTTP_SEE_OTHER);
