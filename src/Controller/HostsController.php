@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Certificates;
 use App\Entity\Hosts;
 use App\Form\HostsType;
 use App\Repository\HostsRepository;
@@ -16,48 +17,37 @@ use Symfony\Component\Routing\Annotation\Route;
 class HostsController extends AbstractController
 {
     /**
-     * @Route("/", name="hosts_index", methods={"GET"})
+     * @Route("/", name="hosts_index", methods={"GET","POST"})
      */
     public function index(HostsRepository $hostsRepository, Request $request): Response
     {
+        
+
         $host = new Hosts();
-        $form = $this->createForm(HostsType::class, $host);
+      $form = $this->createForm(HostsType::class,$host);
         $form->handleRequest($request);
+        if ($form->isSubmitted()) { 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($host);
+            $entityManager->flush();
+            
+            $this->addFlash('success',$host->getName().' Successfuly added! ');
+            return $this->redirectToRoute('hosts_index', [], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('hosts/index.html.twig', [
             'hosts' => $hostsRepository->findAll(),
             'form'=>$form->createView(),
 
         ]);
     }
-
-    /**
-     * @Route("/new", name="hosts_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $host = new Hosts();
-        $form = $this->createForm(HostsType::class, $host);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($host);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('hosts_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('hosts/new.html.twig', [
-            'host' => $host,
-            'form' => $form,
-        ]);
-    }
-
-    /**
+     /**
      * @Route("/{id}", name="hosts_show", methods={"GET"})
      */
     public function show(Hosts $host): Response
     {
+        // $certifica = new Certificates();
+        // $certifica->setOwner("testtt");
+       // $host->set_Certificate($certifica);
         return $this->render('hosts/show.html.twig', [
             'host' => $host,
         ]);
@@ -73,10 +63,10 @@ class HostsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success',$host->getName().' Successfuly updated! ');
             return $this->redirectToRoute('hosts_index', [], Response::HTTP_SEE_OTHER);
         }
-
+     
         return $this->renderForm('hosts/edit.html.twig', [
             'host' => $host,
             'form' => $form,

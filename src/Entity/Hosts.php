@@ -79,9 +79,21 @@ class Hosts
      */
     private $backups = [];
 
-    public function getId(): ?int
-    {
-        return $this->id;
+ 
+
+    // public function set_Certificate(Certificates $_Certificat): self
+    // {
+    //     $this->_Certificat = $_Certificat;
+
+    //     return $this;
+    // }
+    // public function get_Certificat(): ?Certificates
+    // {
+    //     return $this->_Certificat;
+    // }
+     public function getId(): ?int
+     {
+         return $this->id;
     }
 
     public function getName(): ?string

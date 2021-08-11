@@ -6,6 +6,9 @@ use App\Entity\Hosts;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type as FormType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class HostsType extends AbstractType
 {
@@ -17,8 +20,14 @@ class HostsType extends AbstractType
             ->add('discSpace')
             ->add('certificate')
             ->add('cdn')
-            ->add('sites')
+            ->add('sites', CollectionType::class, [
+                'entry_type' => TextType::class,
+                'entry_options' => [
+                    'attr' => ['class' => 'form-control'],
+                ],
+            ])
             ->add('databasesLinks')
+
             ->add('backups')
             ->add('apache_nginx')
             ->add('adminManager')
