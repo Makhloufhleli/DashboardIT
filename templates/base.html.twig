@@ -7,7 +7,6 @@
         <title>{% block title %}Mobelite labs{% endblock %}</title>
         {% block stylesheets %}
             <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
             <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/bootstrap/css/bootstrap.min.css') }}">
             <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
@@ -230,7 +229,7 @@
                                         <li {% if app.request.attributes.get('_route') == 'hosts_index' %} class="active" {% endif %}>
                                             <a href="{{ path('hosts_index') }}">
                                                 <span class="pcoded-micon"><i class="ti-cloud"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.widget.main">Hosts</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.widget.main">WEB Hosting</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>

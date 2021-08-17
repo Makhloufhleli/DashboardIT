@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DomainsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=DomainsRepository::class)
@@ -19,58 +20,69 @@ class Domains
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
+     * @Assert\NotBlank()
      */
     private $creationDate;
 
 
     /**
      * @ORM\OneToOne(targetEntity=Projects::class, cascade={"persist", "remove"})
+     * @Assert\NotBlank
      */
     private $project;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $registrAr;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $registrAnt;
 
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $ns1;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $ns2;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="adminDomains")
+     * @Assert\NotBlank
      */
     private $adminManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="technicalDomains")
+     * @Assert\NotBlank
      */
     private $technicalManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="billingDomains")
+     * @Assert\NotBlank
      */
     private $billingManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="domains")
+     * @Assert\NotBlank
      */
     private $client;
 

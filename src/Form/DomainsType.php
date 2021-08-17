@@ -22,6 +22,7 @@ class DomainsType extends AbstractType {
                     'widget' => 'single_text',
                     // adds a class that can be selected in JavaScript
                     'attr' => ['class' => 'form-control'],
+                    'data' => new \DateTime("now"),
                 ])
                 ->add('registrAr')
                 ->add('registrAnt')

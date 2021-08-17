@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\HostsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass=HostsRepository::class)
  */
@@ -19,31 +21,37 @@ class Hosts
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="adminHosts")
+     * @Assert\NotBlank()
      */
     private $adminManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="technicalHosts")
+     * @Assert\NotBlank()
      */
     private $technicalManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="billingHosts")
+     * @Assert\NotBlank()
      */
     private $billingManager;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $phpVersion;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $discSpace;
 
@@ -51,6 +59,7 @@ class Hosts
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $cdn;
 
@@ -58,6 +67,7 @@ class Hosts
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $apache_nginx;
 

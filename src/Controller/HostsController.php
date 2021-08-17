@@ -10,15 +10,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @Route("/hosts")
  */
 class HostsController extends AbstractController
 {
     /**
-     * @Route("/", name="hosts_index", methods={"GET","POST"})
+     * @Route("/", name="hosts_index", methods={"GET"})
      */
-    public function index(HostsRepository $hostsRepository,Request $request): Response
+    public function index(HostsRepository $hostsRepository): Response
+    {
+        return $this->render('hosts/index.html.twig', [
+            'hosts' => $hostsRepository->findAll(),
+        ]);
+    }
+    
+    /**
+     * @Route("/new", name="hosts_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
     {
         $host = new Hosts();
         $form = $this->createForm(HostsType::class, $host);
@@ -31,8 +43,7 @@ class HostsController extends AbstractController
             return $this->redirectToRoute('hosts_index', [], Response::HTTP_SEE_OTHER);
         }
         
-        return $this->render('hosts/index.html.twig', [
-            'hosts' => $hostsRepository->findAll(),
+        return $this->render('hosts/new.html.twig', [
             'host' => $host,
             'form' => $form->createView(),
         ]);
@@ -53,13 +64,51 @@ class HostsController extends AbstractController
      */
     public function edit(Request $request, Hosts $host): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        
+        //Manage sites collection
+        $orignalSites = new ArrayCollection();
+        foreach ($host->getSites() as $site) {
+            $orignalSites->add($site);
+        }
+        //Manager databases collection
+        $orignalDatabases = new ArrayCollection();
+        foreach ($host->getDatabasesLinks() as $database) {
+            $orignalDatabases->add($database);
+        }
+        //Manage backup collection
+        $orignalBackups = new ArrayCollection();
+        foreach ($host->getBackups() as $backup) {
+            $orignalBackups->add($backup);
+        }
+        
         $form = $this->createForm(HostsType::class, $host);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Sites
+            foreach ($orignalSites as $site) {
+                if (!in_array($site,$host->getSites())) {
+                    $orignalSites = \array_diff($host->getSites(), array($site));
+                }
+            }
+            //Databases
+            foreach ($orignalDatabases as $database) {
+                if (!in_array($database,$host->getDatabasesLinks())) {
+                    $orignalDatabases = \array_diff($host->getDatabasesLinks(), array($database));
+                }
+            }
+            //Backups
+            foreach ($orignalBackups as $backup) {
+                if (!in_array($backup, $host->getBackups())) {
+                    $orignalBackups = \array_diff($host->getBackups(), array($backup));
+                }
+            }
+            
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', $host->getName().' successfuly updated! ');
             return $this->redirectToRoute('hosts_index', [], Response::HTTP_SEE_OTHER);
+            
         }
 
         return $this->renderForm('hosts/edit.html.twig', [

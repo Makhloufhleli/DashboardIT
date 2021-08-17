@@ -6,9 +6,15 @@ use App\Repository\ServersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ServersRepository::class)
+ * @UniqueEntity(
+ *     fields={"identifier"},
+ *     message="This id is already in use, try with an other one!"
+ * )
  */
 class Servers
 {
@@ -21,31 +27,37 @@ class Servers
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="adminServers")
+     * @Assert\NotBlank
      */
     private $adminManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="technicalServers")
+     * @Assert\NotBlank
      */
     private $technicalManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="billingServers")
+     * @Assert\NotBlank
      */
     private $billingManager;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $ipAdress;
 
@@ -56,11 +68,13 @@ class Servers
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $model;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $region;
 
@@ -76,47 +90,57 @@ class Servers
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $operatingSystem;
 
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $cpu;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $ram;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $discSpace;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * 
      */
     private $extraDisc;
 
     /**
      * @ORM\OneToMany(targetEntity=Projects::class, mappedBy="server")
+     * @Assert\NotBlank
      */
     private $projects;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $apache_nginx;
 
     /**
      * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="servers")
+     * @Assert\NotBlank
      */
     private $client;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $identifier;
 

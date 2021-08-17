@@ -1,9 +1,6 @@
   'use strict';
 $(document).ready(function () {
 //Basic alert
-	document.querySelector('.sweet-1').onclick = function(){
-		swal("Here's a message!", "It's pretty, isn't it?")
-	};
 	//success message
 	document.querySelector('.alert-success-msg').onclick = function(){
 		swal("Good job!", "You clicked the button!", "success");

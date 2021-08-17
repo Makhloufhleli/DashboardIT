@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @Route("/servers")
@@ -16,11 +17,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServersController extends AbstractController {
 
     /**
-     * @Route("/", name="servers_index", methods={"GET","POST"})
+     * @Route("/", name="servers_index", methods={"GET"})
      */
     public function index(
+            ServersRepository $serversRepository
+    ): Response {
+        $servers = $serversRepository->findAll();
+        return $this->render('servers/index.html.twig', [
+                    'servers' => $servers,
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="servers_new", methods={"GET","POST"})
+     */
+    public function new(
             ServersRepository $serversRepository,
-            Request $request
+            Request $request,
+            ValidatorInterface $validator
     ): Response {
         $servers = $serversRepository->findAll();
         $server = new Servers();
@@ -29,13 +43,6 @@ class ServersController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            foreach ($servers as $s) {
-                if ($server->getIdentifier() === $s->getIdentifier()) {
-                    $this->addFlash('error', 'the id '.$server->getIdentifier() . ' is already in use try with another one! ');
-                    return $this->redirectToRoute('servers_index', [], Response::HTTP_SEE_OTHER);
-                    die();
-                }
-            }
             $entityManager->persist($server);
             $entityManager->flush();
             $this->addFlash('success', $server->getName() . ' Successfuly added! ');
@@ -43,20 +50,18 @@ class ServersController extends AbstractController {
         }
 
 
-        return $this->render('servers/index.html.twig', [
-                    'servers' => $servers,
+        return $this->render('servers/new.html.twig', [
                     'server' => $server,
                     'form' => $form->createView(),
         ]);
     }
-    
+
     /**
      * @Route("/{id}", name="servers_show", methods={"GET"})
      */
-    public function show(Servers $server): Response
-    {
+    public function show(Servers $server): Response {
         return $this->render('servers/show.html.twig', [
-            'server' => $server,
+                    'server' => $server,
         ]);
     }
 

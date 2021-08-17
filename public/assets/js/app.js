@@ -50,8 +50,8 @@ function addNewSiteForm() {
     var newSiteForm = prototype;
     newSiteForm = newSiteForm.replace(/__name__/g, index);
     $collectionSites.data('index', index+1);
-    var $panel = $('<div class="panel row"></div>');
-    var $panelBody = $('<div class="panel-body col col-lg-11"></div>').append(newSiteForm);
+    var $panel = $('<div class="panel col-lg-12"></div>');
+    var $panelBody = $('<div class="panel-body"></div>').append(newSiteForm);
     $panel.append($panelBody);
     addRemoveSiteButton($panel);
     $addNewSite.before($panel);
@@ -63,8 +63,8 @@ function addNewDatabaseForm() {
     var newDatabaseForm = prototype;
     newDatabaseForm = newDatabaseForm.replace(/__name__/g, index);
     $collectionDatabases.data('index', index+1);
-    var $panel = $('<div class="panel row"></div>');
-    var $panelBody = $('<div class="panel-body col col-lg-11"></div>').append(newDatabaseForm);
+    var $panel = $('<div class="panel panel-primary col-lg-12"><div class="panel-heading"></div></div>');
+    var $panelBody = $('<div class="panel-body"></div>').append(newDatabaseForm);
     $panel.append($panelBody);
     addRemoveDatabaseButton($panel);
     $addNewDatabase.before($panel);
@@ -76,8 +76,8 @@ function addNewBackupForm() {
     var newBackupForm = prototype;
     newBackupForm = newBackupForm.replace(/__name__/g, index);
     $collectionBackups.data('index', index+1);
-    var $panel = $('<div class="panel row"></div>');
-    var $panelBody = $('<div class="panel-body col col-lg-11"></div>').append(newBackupForm);
+    var $panel = $('<div class="panel panel-primary col-lg-12"><div class="panel-heading"></div></div>');
+    var $panelBody = $('<div class="panel-body"></div>').append(newBackupForm);
     $panel.append($panelBody);
     addRemoveBackupButton($panel);
     $addNewBackup.before($panel);
@@ -85,7 +85,7 @@ function addNewBackupForm() {
 
 
 function addRemoveSiteButton ($panel) {
-    var $removeSiteButton = $('<a href="#" class="badge badge-danger btn f-right mt-3"><i class="fa fa-trash"></i></a>');
+    var $removeSiteButton = $('<a href="#" class="badge badge-danger btn mt-2 f-right"><i class="fa fa-trash"></i></a>');
     var $panelFooter = $('<div class="panel-body"></div>').append($removeSiteButton);
     $removeSiteButton.click(function (e) {
         e.preventDefault();
@@ -97,7 +97,7 @@ function addRemoveSiteButton ($panel) {
 }
 
 function addRemoveDatabaseButton ($panel) {
-    var $removeDatabaseButton = $('<a href="#" class="badge badge-danger btn f-right mt-3"><i class="fa fa-trash"></i></a>');
+    var $removeDatabaseButton = $('<a href="#" class="badge badge-danger btn mt-2 f-right"><i class="fa fa-trash"></i></a>');
     var $panelFooter = $('<div class="panel-body"></div>').append($removeDatabaseButton);
     $removeDatabaseButton.click(function (e) {
         e.preventDefault();
@@ -109,7 +109,7 @@ function addRemoveDatabaseButton ($panel) {
 }
 
 function addRemoveBackupButton ($panel) {
-    var $removeBackupButton = $('<a href="#" class="badge badge-danger btn f-right mt-3"><i class="fa fa-trash"></i></a>');
+    var $removeBackupButton = $('<a href="#" class="badge badge-danger btn mt-2 f-right"><i class="fa fa-trash"></i></a>');
     var $panelFooter = $('<div class="panel-body"></div>').append($removeBackupButton);
     $removeBackupButton.click(function (e) {
         e.preventDefault();

@@ -16,12 +16,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class DomainsController extends AbstractController
 {
     /**
-     * @Route("/", name="domains_index", methods={"GET","POST"})
+     * @Route("/", name="domains_index", methods={"GET"})
      */
     public function index(
-        DomainsRepository $domainsRepository,
-        Request $request
+        DomainsRepository $domainsRepository
     ): Response{
+        
+        
+        return $this->render('domains/index.html.twig', [
+            'domains' => $domainsRepository->findAll(),
+        ]);
+    }
+    
+    /**
+     * @Route("/new", name="domains_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response{
         $domain = new Domains();
         $form = $this->createForm(DomainsType::class, $domain);
         $form->handleRequest($request);
@@ -34,8 +44,7 @@ class DomainsController extends AbstractController
             return $this->redirectToRoute('domains_index', [], Response::HTTP_SEE_OTHER);
         }
         
-        return $this->render('domains/index.html.twig', [
-            'domains' => $domainsRepository->findAll(),
+        return $this->render('domains/new.html.twig', [
             'domain' => $domain,
             'form' => $form->createView(),
         ]);

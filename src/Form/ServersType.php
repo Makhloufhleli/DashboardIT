@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\ChoiceList\ChoiceList;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ServersType extends AbstractType {
 
@@ -38,9 +38,6 @@ class ServersType extends AbstractType {
                         'Nginx' => 'nginx'
                     ],
                     'label' => FALSE,
-                    'attr' => [
-                        'class' => 'form-control'
-                    ]
                 ])
                 ->add('adminManager', EntityType::class, [
                     'class' => AccountsManagers::class,

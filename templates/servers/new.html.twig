@@ -1,0 +1,279 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Servers{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/component.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/notification/notification.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/bower_components/animate.css/css/animate.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/demo.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/j-pro/css/j-pro-modern.css') }}">
+
+{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <ul class="notifications" id="alert">
+            <li>
+                <button hidden id="alert_btn_success" class="btn btn-primary waves-effect" data-type="success" data-animation-in="animated bounceInRight" data-animation-out="animated bounceOutRight" data-title="Success! " data-message="{{ message }}">Bounce In Right</button>
+            </li>
+        </ul>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <ul class="notifications" id="alert">
+            <li>
+                <button hidden id="alert_btn_success" class="btn btn-primary waves-effect" data-type="danger" data-animation-in="animated bounceInRight" data-animation-out="animated bounceOutRight" data-title="Error! " data-message="{{ message }}">Bounce In Right</button>
+            </li>
+        </ul>
+    {% endfor %}
+    <div class="page-wrapper">
+        <div class="page-header">
+            <div class="page-header-title">
+                <h4>Servers</h4>
+            </div>
+            <div class="page-header-breadcrumb">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('dashboard') }}">
+                            <i class="icofont icofont-home"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Servers</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-body">
+            <div class="row">
+                <div class="col col-lg-12">
+                    <div class="card info-colorr">
+                        <div class="card-header">
+                            <h5>Add new server</h5>
+
+                            <a class="badge badge-info btn f-right"
+                               href="{{ path('servers_index') }}" >
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                        </div>
+                        <div class="card-block">
+                            <div class="j-wrapper j-wrapper-640">
+                                {{ form_start(form, {attr: {'class':'j-pro', 'novalidate':''}}) }}
+                                <div class="j-content">
+                                    <div class="j-row">
+                                        <div class="j-span12 j-unit">
+                                            <label class="j-label">ID</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.identifier) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Server identifier(Must bee unique)</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.identifier) }}</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Name</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.name) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Server name</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.name) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Type</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.type) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Server type</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.type) }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Ip adress</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.ipAdress, {attr: {'class':'form-control ip', 'data-mask':'999.999.999.999'}}) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Ip adress</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.ipAdress) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Model</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.model) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Model</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.model) }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="j-divider j-gap-bottom-25"></div>
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Project public cloud</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.projectPublicCloud) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Project public cloud</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.projectPublicCloud) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Region</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.region) }}
+                                                <span class="j-tooltip j-tooltip-right-top">region</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.region) }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">data center</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.dataCenter) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Data center</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.dataCenter) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Subscription</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.subscription) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Subscription</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.subscription) }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="j-divider j-gap-bottom-25"></div>
+                                    <div class="j-row">
+                                        <div class="j-span4 j-unit">
+                                            <label class="j-label">OS</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.operatingSystem) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Operating system</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.operatingSystem) }}</label>
+                                        </div>
+                                        <div class="j-span4 j-unit">
+                                            <label class="j-label">CPU</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.cpu) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Processor</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.cpu) }}</label>
+                                        </div>
+                                        <div class="j-span4 j-unit">
+                                            <label class="j-label">RAM</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.ram) }}
+                                                <span class="j-tooltip j-tooltip-right-top">RAM Memory capacity</span>
+                                            </div>
+                                        </div>
+                                            <label class="text-danger error">{{ form_errors(form.ram) }}</label>
+                                    </div>
+                                    <div class="j-row">
+                                        <div class="j-span4 j-unit">
+                                            <label class="j-label">Disk space</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.discSpace) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Disc space(TB/GB)</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.discSpace) }}</label>
+                                        </div>
+                                        <div class="j-span4 j-unit">
+                                            <label class="j-label">Extra disk</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.extraDisc) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Extra disk space(TB/GB)</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.extraDisc) }}</label>
+                                        </div>
+                                        <div class="j-span4 j-unit">
+                                            <label class="j-label">Web Server</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.apache_nginx) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Apache/Nginx</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.apache_nginx) }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="j-divider j-gap-bottom-25"></div>
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Admin</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.adminManager) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Administraton manager</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.adminManager) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Technic</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.technicalManager) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Technical manager</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.technicalManager) }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Billing</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.billingManager) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Billing manager</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.billingManager) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Client</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.client) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Client</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.client) }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="j-footer">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/data-table/js/data-table-custom.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('assets/bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/modal.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/modalEffects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/classie.js') }}"></script>
+
+    <script src="{{ asset('assets/pages/form-masking/inputmask.js') }}"></script>
+    <script src="{{ asset('assets/pages/form-masking/jquery.inputmask.js') }}"></script>
+    <script src="{{ asset('assets/pages/form-masking/autoNumeric.js') }}"></script>
+    <script src="{{ asset('assets/pages/form-masking/form-mask.js') }}"></script>
+
+    <script>
+        $("#alert").ready(function(){
+            $("#alert_btn_success").click();
+        });
+    </script>
+
+{% endblock %}
