@@ -47,10 +47,10 @@
                     <div class="card info-colorr">
                         <div class="card-header">
                             <h5>Edit {{ user.firstName }} {{ user.lastName }}</h5>
-                            <a href="{{ path('user_index') }}">
-                                <button type="button" class="btn btn-info btn-outline-info btn-round f-right mr-lg-3">
-                                    <i class="fa fa-arrow-circle-left"></i>
-                                </button>
+
+                            <a class="badge badge-info btn f-right"
+                               href="{{ path('user_index') }}">
+                                <i class="fa fa-arrow-left"></i>
                             </a>
                         </div>
                         <div class="card-block">
