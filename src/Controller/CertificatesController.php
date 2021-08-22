@@ -16,25 +16,49 @@ use Symfony\Component\Routing\Annotation\Route;
 class CertificatesController extends AbstractController
 {
     /**
-     * @Route("/", name="certificates_index", methods={"GET","POST"})
+     * @Route("/", name="certificates_index", methods={"GET"})
      */
-    public function index(Request $request, CertificatesRepository $certificatesRepository): Response
+    public function index(CertificatesRepository $certificatesRepository): Response
     {
+        return $this->render('certificates/index.html.twig', [
+            'certificates' => $certificatesRepository->findAll(),
+        ]);
+    }
+    
+    /**
+     * @Route("/new", name="certificates_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response{
         $certificate = new Certificates();
         $form = $this->createForm(CertificatesType::class, $certificate);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($certificate->getRenewalMode() == 'auto' && $certificate->getRenewalDate() == null){
+                $creationDate = $certificate->getCreationDate();
+                
+                $d = new \DateTime();
+                $d->setDate($creationDate->format('Y'), $creationDate->format('m'), $creationDate->format('d'));
+                $d->setTimestamp($creationDate->getTimestamp());
+                $d->setTimezone($creationDate->getTimezone());
+                $renewalDate = $d->add(new \DateInterval('P1Y'));
+                
+                $certificate->setRenewalDate($renewalDate);
+            }
             $entityManager = $this->getDoctrine()->getManager();
-            $certificate->getDomain()->setHasCertificate(true);
+            if($certificate->getDomain() != null){
+                $certificate->getDomain()->setHasCertificate(true);
+            }
+            if($certificate->getHost() != null){
+                $certificate->getHost()->setHasCertificate(true);
+            }
             $entityManager->persist($certificate);
             $entityManager->flush();
             $this->addFlash('success','Certificate successfuly added! ');
             return $this->redirectToRoute('certificates_index', [], Response::HTTP_SEE_OTHER);
         }
         
-        return $this->render('certificates/index.html.twig', [
-            'certificates' => $certificatesRepository->findAll(),
+        return $this->render('certificates/new.html.twig', [
             'certificate' => $certificate,
             'form' => $form->createView(),
         ]);
@@ -77,6 +101,7 @@ class CertificatesController extends AbstractController
     public function delete(Request $request, Certificates $certificate): Response
     {
         if ($this->isCsrfTokenValid('delete'.$certificate->getId(), $request->request->get('_token'))) {
+            $certificate->getDomain()->setHasCertificate(false);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($certificate);
             $entityManager->flush();

@@ -57,94 +57,12 @@
                             <h5>Certificates</h5>
 
                             <a class="badge badge-info btn f-right"
-                               href="Javascript:void();" 
-                               data-toggle="modal" 
-                               data-target="#large-Modal">
+                               href="{{ path('certificates_new') }}">
                                 <i class="fa fa-certificate f-right"></i>
                                 <i class="fa fa-plus"></i>
                             </a>
                         </div>
                         <div class="card-block">
-                            <div class="modal fade md-effect-5" id="large-Modal" tabindex="-1" role="dialog">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="col-sm-12">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h5>Add new certificate</h5>
-                                                    <a class="badge btn-outline-danger btn f-right"
-                                                       href="Javascript:void();" 
-                                                       data-dismiss="modal">
-                                                        <i class="fa fa-close"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="card-block">
-                                                    <div class="j-wrapper j-wrapper-640">
-                                                        {{ form_start(form, {attr: {'class':'j-pro', 'novalidate':''}}) }}
-                                                        <div class="j-content">
-                                                            <div class="j-row">
-                                                                <div class="j-span6 j-unit">
-                                                                    <label class="j-label">Domain</label>
-                                                                    <div class="j-input">
-                                                                        {{ form_widget(form.domain) }}
-                                                                        <span class="j-tooltip j-tooltip-right-top">Domain</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="j-span6 j-unit">
-                                                                    <label class="j-label">Renewal mode</label>
-                                                                    <div class="j-input">
-                                                                        {{ form_widget(form.renewalMode) }}
-                                                                        <span class="j-tooltip j-tooltip-right-top">Renewal mode</span>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="j-row">
-                                                                <div class="j-span6 j-unit">
-                                                                    <label class="j-label">Creation date</label>
-                                                                    <div class="j-input">
-                                                                        {{ form_widget(form.creationDate) }}
-                                                                        <span class="j-tooltip j-tooltip-right-top">Creation date</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="j-span6 j-unit">
-                                                                    <label class="j-label">Renewal date</label>
-                                                                    <div class="j-input">
-                                                                        {{ form_widget(form.renewalDate) }}
-                                                                        <span class="j-tooltip j-tooltip-right-top">Renewal date</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="j-row">
-                                                                <div class="j-span6 j-unit">
-                                                                    <label class="j-label">Owner</label>
-                                                                    <div class="j-input">
-                                                                        {{ form_widget(form.owner) }}
-                                                                        <span class="j-tooltip j-tooltip-right-top">Owner name</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="j-span6 j-unit">
-                                                                    <label class="j-label">Issuer</label>
-                                                                    <div class="j-input">
-                                                                        {{ form_widget(form.issuer) }}
-                                                                        <span class="j-tooltip j-tooltip-right-top">Issuer name</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                        </div>
-                                                        <div class="j-footer">
-                                                            <button type="submit" class="btn btn-primary">Save</button>
-                                                        </div>
-                                                        {{ form_end(form) }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end add accounts_certificate -->
                             <div class="dt-responsive table-responsive">
                                 <table id="simpletable" class="table table-striped table-bordered nowrap">
                                     <thead>

@@ -87,9 +87,16 @@ class Hosts
     private $backups = [];
 
     /**
-     * @ORM\OneToOne(targetEntity=Certificates::class, cascade={"persist", "remove"})
+     * @ORM\Column(type="boolean")
+     */
+    private $hasCertificate;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Certificates::class, mappedBy="host", cascade={"persist", "remove"})
      */
     private $certificate;
+
+    
 
     public function getId(): ?int
     {
@@ -232,6 +239,18 @@ class Hosts
         return $this;
     }
 
+    public function getHasCertificate(): ?bool
+    {
+        return $this->hasCertificate;
+    }
+
+    public function setHasCertificate(bool $hasCertificate): self
+    {
+        $this->hasCertificate = $hasCertificate;
+
+        return $this;
+    }
+
     public function getCertificate(): ?Certificates
     {
         return $this->certificate;
@@ -239,8 +258,19 @@ class Hosts
 
     public function setCertificate(?Certificates $certificate): self
     {
+        // unset the owning side of the relation if necessary
+        if ($certificate === null && $this->certificate !== null) {
+            $this->certificate->setHost(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($certificate !== null && $certificate->getHost() !== $this) {
+            $certificate->setHost($this);
+        }
+
         $this->certificate = $certificate;
 
         return $this;
     }
+
 }

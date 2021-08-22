@@ -22,8 +22,9 @@ class HostsType extends AbstractType {
                 ->add('cdn')
                 ->add('discSpace')
                 ->add('apache_nginx', ChoiceType::class, [
+                    'placeholder'=>'Choose web server',
+                    'required'=>true,
                     'choices' => [
-                        'Select Web server'=>'',
                         'Apache' => 'apache',
                         'Nginx' => 'nginx'
                     ],
@@ -63,6 +64,8 @@ class HostsType extends AbstractType {
                 
                 ->add('adminManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Admin',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
@@ -71,6 +74,8 @@ class HostsType extends AbstractType {
                 ])
                 ->add('technicalManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Technical manager',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
@@ -79,6 +84,8 @@ class HostsType extends AbstractType {
                 ])
                 ->add('billingManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Billing manager',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')

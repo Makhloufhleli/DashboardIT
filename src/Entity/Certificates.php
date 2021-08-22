@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CertificatesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CertificatesRepository::class)
@@ -18,36 +19,45 @@ class Certificates
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Domains::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Domains::class,)
+     * @ORM\JoinColumn(name="domain_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $domain;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank()
      */
     private $creationDate;
 
-    
-
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $renewalMode;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $owner;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $issuer;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date")
      */
     private $renewalDate;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Hosts::class, inversedBy="certificate")
+     * @ORM\JoinColumn(name="host_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $host;
 
 
     public function getId(): ?int
@@ -123,6 +133,18 @@ class Certificates
 
     function setRenewalDate($renewalDate): void {
         $this->renewalDate = $renewalDate;
+    }
+
+    public function getHost(): ?Hosts
+    {
+        return $this->host;
+    }
+
+    public function setHost(?Hosts $host): self
+    {
+        $this->host = $host;
+
+        return $this;
     }
 
 

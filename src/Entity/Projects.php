@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjectsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Projects
      * @ORM\ManyToOne(targetEntity=Servers::class, inversedBy="projects")
      */
     private $server;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Domains::class, mappedBy="project")
+     */
+    private $domains;
+
+    public function __construct()
+    {
+        $this->domains = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -56,6 +68,36 @@ class Projects
     public function setServer(?Servers $server): self
     {
         $this->server = $server;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Domains[]
+     */
+    public function getDomains(): Collection
+    {
+        return $this->domains;
+    }
+
+    public function addDomain(Domains $domain): self
+    {
+        if (!$this->domains->contains($domain)) {
+            $this->domains[] = $domain;
+            $domain->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDomain(Domains $domain): self
+    {
+        if ($this->domains->removeElement($domain)) {
+            // set the owning side to null (unless already changed)
+            if ($domain->getProject() === $this) {
+                $domain->setProject(null);
+            }
+        }
 
         return $this;
     }

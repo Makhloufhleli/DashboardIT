@@ -57,19 +57,31 @@
                                 {{ form_start(form, {attr: {'class':'j-pro', 'novalidate':''}}) }}
                                 <div class="j-content">
                                     <div class="j-row">
-                                        <div class="j-span6 j-unit">
+                                        <div class="j-span12 j-unit">
                                             <label class="j-label">Name</label>
                                             <div class="j-input">
                                                 {{ form_widget(form.name) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Domain name (URL)</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.name) }}</label>
                                         </div>
+                                    </div>
+                                    <div class="j-row">
                                         <div class="j-span6 j-unit">
                                             <label class="j-label">Creation date</label>
                                             <div class="j-input">
                                                 {{ form_widget(form.creationDate) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Domain creation date</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.creationDate) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Renewal date</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.renewalDate) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Domain renewal date</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.renewalDate) }}</label>
                                         </div>
                                     </div>
                                     <div class="j-row">
@@ -79,6 +91,7 @@
                                                 {{ form_widget(form.registrAr) }}
                                                 <span class="j-tooltip j-tooltip-right-top">RegistrAr</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.registrAr) }}</label>
                                         </div>
                                         <div class="j-span6 j-unit">
                                             <label class="j-label">RegistrAnt</label>
@@ -86,6 +99,7 @@
                                                 {{ form_widget(form.registrAnt) }}
                                                 <span class="j-tooltip j-tooltip-right-top">RegistrAnt</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.registrAnt) }}</label>
                                         </div>
                                     </div>
                                     <div class="j-divider j-gap-bottom-25"></div>
@@ -96,13 +110,15 @@
                                                 {{ form_widget(form.ns1) }}
                                                 <span class="j-tooltip j-tooltip-right-top">NS 01</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.ns1) }}</label>
                                         </div>
                                         <div class="j-span6 j-unit">
                                             <label class="j-label">NS 02</label>
                                             <div class="j-input">
                                                 {{ form_widget(form.ns2) }}
-                                                <span class="j-tooltip j-tooltip-right-top">NNS 02</span>
+                                                <span class="j-tooltip j-tooltip-right-top">NS 02</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.ns2) }}</label>
                                         </div>
                                     </div>
                                     <div class="j-row">
@@ -112,6 +128,7 @@
                                                 {{ form_widget(form.project) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Project associated</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.project) }}</label>
                                         </div>
                                         <div class="j-span6 j-unit">
                                             <label class="j-label">Client</label>
@@ -119,6 +136,7 @@
                                                 {{ form_widget(form.client) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Client associated</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.client) }}</label>
                                         </div>
                                     </div>
                                     <div class="j-divider j-gap-bottom-25"></div>
@@ -129,6 +147,7 @@
                                                 {{ form_widget(form.adminManager) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Administration manager</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.adminManager) }}</label>
                                         </div>
                                         <div class="j-span4 j-unit">
                                             <label class="j-label">Technical manager</label>
@@ -136,6 +155,7 @@
                                                 {{ form_widget(form.technicalManager) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Technical administration manager</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.technicalManager) }}</label>
                                         </div>
                                         <div class="j-span4 j-unit">
                                             <label class="j-label">Billing manager</label>
@@ -143,6 +163,7 @@
                                                 {{ form_widget(form.billingManager) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Billing dministration manager</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.billingManager) }}</label>
                                         </div>
                                     </div>
                                 </div>

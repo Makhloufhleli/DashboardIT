@@ -13,6 +13,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\AccountsManagers;
 use App\Repository\AccountsManagersRepository;
 
+use App\Entity\Projects;
+use App\Repository\ProjectsRepository;
+use App\Entity\Clients;
+
 class DomainsType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
@@ -24,13 +28,24 @@ class DomainsType extends AbstractType {
                     'attr' => ['class' => 'form-control'],
                     'data' => new \DateTime("now"),
                 ])
+                ->add('renewalDate', DateType::class, [
+                    'widget' => 'single_text',
+                    // adds a class that can be selected in JavaScript
+                    'attr' => ['class' => 'form-control']
+                ])
                 ->add('registrAr')
                 ->add('registrAnt')
                 ->add('ns1')
                 ->add('ns2')
-                ->add('project')
+                ->add('project', EntityType::class, [
+                    'class' => Projects::class,
+                    'placeholder'=>'Choose Project',
+                    'required'=>true,
+                ])
                 ->add('adminManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Admin',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
@@ -39,6 +54,8 @@ class DomainsType extends AbstractType {
                 ])
                 ->add('technicalManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Technical manager',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
@@ -47,13 +64,19 @@ class DomainsType extends AbstractType {
                 ])
                 ->add('billingManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Billing manager',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
                                 ->setParameter('val', 'billingManager');
                     },
                 ])
-                ->add('client')
+                ->add('client', EntityType::class, [
+                    'class'=> Clients::class,
+                    'placeholder'=>'Choose Client',
+                    'required'=>true,
+                ])
         ;
     }
 

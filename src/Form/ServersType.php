@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Servers;
 use App\Entity\AccountsManagers;
 use App\Repository\AccountsManagersRepository;
-use App\Entity\Projects;
+use App\Entity\Clients;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,6 +33,8 @@ class ServersType extends AbstractType {
                 ->add('discSpace')
                 ->add('extraDisc')
                 ->add('apache_nginx', ChoiceType::class, [
+                    'placeholder'=>'Choose Web server',
+                    'required'=>true,
                     'choices' => [
                         'Apache' => 'apache',
                         'Nginx' => 'nginx'
@@ -41,6 +43,8 @@ class ServersType extends AbstractType {
                 ])
                 ->add('adminManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Admin',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
@@ -49,6 +53,8 @@ class ServersType extends AbstractType {
                 ])
                 ->add('technicalManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Technical manager',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
@@ -57,13 +63,19 @@ class ServersType extends AbstractType {
                 ])
                 ->add('billingManager', EntityType::class, [
                     'class' => AccountsManagers::class,
+                    'placeholder'=>'Choose Billing manager',
+                    'required'=>true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
                                 ->setParameter('val', 'billingManager');
                     },
                 ])
-                ->add('client')
+                ->add('client', EntityType::class, [
+                    'class' => Clients::class,
+                    'placeholder'=>'Choose Client',
+                    'required'=>true,
+                ])
         ;
     }
 

@@ -37,6 +37,7 @@ class HostsController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $host->setHasCertificate(false);
             $entityManager->persist($host);
             $entityManager->flush();
             $this->addFlash('success', $host->getName().' successfuly added! ');

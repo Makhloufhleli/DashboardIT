@@ -66,7 +66,12 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <ul>
-                                                                <li><strong>Domain: </strong>{{ certificate.domain.name }}</li>
+                                                                {% if certificate.domain != null %}
+                                                                    <li><strong>Domain: </strong>{{ certificate.domain.name }}</li>
+                                                                {% endif %}
+                                                                {% if certificate.host != null %}
+                                                                    <li><strong>Host: </strong>{{ certificate.host.name }}</li>
+                                                                {% endif %}
                                                                 <li><strong>Renewal mode:</strong> 
                                                                     {% if certificate.renewalMode == 'auto' %}
                                                                         <label class="badge badge-success btn">Auto</label>
@@ -75,7 +80,7 @@
                                                                     {% endif %}
                                                                 </li>
                                                                 <li><strong>Creation date:</strong> {{ certificate.creationDate ? certificate.creationDate|date('d/m/Y') : ''  }}</li>
-                                                                <li><strong>Renewal date:</strong> {{ certificate.renewalDate ? certificate.creationDate|date('d/m/Y') : '' }}</li>
+                                                                <li><strong>Renewal date:</strong> {{ certificate.renewalDate ? certificate.renewalDate|date('d/m/Y') : '' }}</li>
                                                                 <li><strong>Owner:</strong> {{ certificate.owner }}</li>
                                                                 <li><strong>Issuer:</strong> {{ certificate.issuer }}</li>
                                                             </ul>

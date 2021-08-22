@@ -30,13 +30,6 @@ class Domains
      */
     private $creationDate;
 
-
-    /**
-     * @ORM\OneToOne(targetEntity=Projects::class, cascade={"persist", "remove"})
-     * @Assert\NotBlank
-     */
-    private $project;
-
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
@@ -90,6 +83,16 @@ class Domains
      * @ORM\Column(type="boolean")
      */
     private $hasCertificate;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $renewalDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Projects::class, inversedBy="domains")
+     */
+    private $project;
     
 
     public function __construct() {
@@ -130,18 +133,7 @@ class Domains
         return $this;
     }
 
-    public function getProject(): ?Projects
-    {
-        return $this->project;
-    }
-
-    public function setProject(?Projects $project): self
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
+    
     public function getRegistrAr(): ?string
     {
         return $this->registrAr;
@@ -246,6 +238,30 @@ class Domains
     public function setHasCertificate(bool $hasCertificate): self
     {
         $this->hasCertificate = $hasCertificate;
+
+        return $this;
+    }
+
+    public function getRenewalDate(): ?\DateTimeInterface
+    {
+        return $this->renewalDate;
+    }
+
+    public function setRenewalDate(?\DateTimeInterface $renewalDate): self
+    {
+        $this->renewalDate = $renewalDate;
+
+        return $this;
+    }
+
+    public function getProject(): ?Projects
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Projects $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }
