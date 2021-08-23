@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Hosts;
+use App\Entity\Clients;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,21 +23,20 @@ class HostsType extends AbstractType {
                 ->add('cdn')
                 ->add('discSpace')
                 ->add('apache_nginx', ChoiceType::class, [
-                    'placeholder'=>'Choose web server',
-                    'required'=>true,
+                    'placeholder' => 'Choose web server',
+                    'required' => true,
                     'choices' => [
                         'Apache' => 'apache',
                         'Nginx' => 'nginx'
                     ],
                     'label' => FALSE
                 ])
-                
                 ->add('sites', CollectionType::class, [
                     'entry_type' => TextType::class,
                     'entry_options' => [
                         'attr' => ['class' => 'form-control'],
                     ],
-                    'label'=>false,
+                    'label' => false,
                     'by_reference' => false,
                     'allow_add' => true,
                     'allow_delete' => true
@@ -46,7 +46,7 @@ class HostsType extends AbstractType {
                     'entry_options' => [
                         'attr' => ['class' => 'form-control'],
                     ],
-                    'label'=>false,
+                    'label' => false,
                     'by_reference' => false,
                     'allow_add' => true,
                     'allow_delete' => true
@@ -56,16 +56,15 @@ class HostsType extends AbstractType {
                     'entry_options' => [
                         'attr' => ['class' => 'form-control'],
                     ],
-                    'label'=>false,
+                    'label' => false,
                     'by_reference' => false,
                     'allow_add' => true,
                     'allow_delete' => true
                 ])
-                
                 ->add('adminManager', EntityType::class, [
                     'class' => AccountsManagers::class,
-                    'placeholder'=>'Choose Admin',
-                    'required'=>true,
+                    'placeholder' => 'Choose Admin',
+                    'required' => true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
@@ -74,8 +73,8 @@ class HostsType extends AbstractType {
                 ])
                 ->add('technicalManager', EntityType::class, [
                     'class' => AccountsManagers::class,
-                    'placeholder'=>'Choose Technical manager',
-                    'required'=>true,
+                    'placeholder' => 'Choose Technical manager',
+                    'required' => true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
@@ -84,14 +83,24 @@ class HostsType extends AbstractType {
                 ])
                 ->add('billingManager', EntityType::class, [
                     'class' => AccountsManagers::class,
-                    'placeholder'=>'Choose Billing manager',
-                    'required'=>true,
+                    'placeholder' => 'Choose Billing manager',
+                    'required' => true,
                     'query_builder' => function (AccountsManagersRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->andWhere('u.function = :val')
                                 ->setParameter('val', 'billingManager');
                     },
                 ])
+                ->add('client', EntityType::class, [
+                    'class' => Clients::class,
+                    'placeholder' => 'Choose Client',
+                    'required' => true,
+                ])
+                ->add('identifier')
+                ->add('cluster')
+                ->add('datacenter')
+                ->add('type')
+                ->add('subscription')
         ;
     }
 

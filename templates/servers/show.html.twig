@@ -66,6 +66,8 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <ul>
+                                                                <li>Name: {{ server.name }}</li>
+                                                                <li>ID: {{ server.identifier }}</li>
                                                                 <li>Client: {{ server.client }}</li>
                                                                 <li>Type: {{ server.type }}</li>
                                                                 <li>Model: {{ server.model }}</li>
@@ -125,6 +127,33 @@
                                         </div>
                                                             
                                     </div>
+                                                            
+                                    <div class="row mt-2">
+                                        <div class="col-lg-12 users-card">
+                                            <div class="card user-card">
+                                                <div class="card-header">
+                                                    Projects
+                                                </div>
+                                                <div class="card-block">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            
+                                                            <ul>
+                                                                {% for project in server.projects %}
+                                                                    <li> {{ project.name }}</li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                                            
+                                    </div>
+                                                            
+                                                            
                                 </div>
 
                             </div>

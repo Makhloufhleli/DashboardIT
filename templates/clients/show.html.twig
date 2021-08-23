@@ -65,6 +65,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#domains" role="tab">Domains</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#hosts" role="tab">Web hosts</a>
+                                        </li>
 
                                     </ul>
                                     <!-- Tab panes -->
@@ -75,9 +78,9 @@
                                                     <div class="col-lg-6 users-card">
                                                         <div class="card user-card">
                                                             <div class="card-header">
-                                                                <span class="label label-default f-left"> Server name: </span>
-                                                                <a href="">
-                                                                    {{ server.name }}
+                                                                <strong> Server name: </strong> {{ server.name }} 
+                                                                <a class="badge badge-info f-right btn" href="{{ path('servers_show', {'id': server.id}) }}">
+                                                                    <i class="icofont icofont-eye"></i>
                                                                 </a>
                                                             </div>
                                                             <div class="card-block">
@@ -116,9 +119,9 @@
                                                     <div class="col-lg-6 users-card">
                                                         <div class="card user-card">
                                                             <div class="card-header">
-                                                                <span class="label label-default f-left"> Domain name: </span>
-                                                                <a href="">
-                                                                    {{ domain.name }}
+                                                                <strong> Domain name: </strong>{{ domain.name }}
+                                                                <a class="badge badge-info f-right btn" href="{{ path('domains_show', {'id': domain.id}) }}">
+                                                                    <i class="icofont icofont-eye"></i>
                                                                 </a>
                                                             </div>
                                                             <div class="card-block">
@@ -130,15 +133,31 @@
                                                                             </div>
                                                                             <div class="card-body">
                                                                                 <div class="row">
-                                                                                    <h6>
-                                                                                        {{ domain.project.name }}
-                                                                                    </h6>
+                                                                                    <h6>{{ domain.project.name }}</h6>
                                                                                 </div>
                                                                             </div>
 
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane" id="hosts" role="tabpanel">
+                                            <div class="row">
+                                                {% for host in client.hosts %}
+                                                    <div class="col-lg-6 users-card">
+                                                        <div class="card user-card">
+                                                            <div class="card-block">
+                                                                <strong>Host name:</strong> {{ host.name }}
+                                                                <a class="badge badge-info f-right btn" href="{{ path('hosts_show', {'id': host.id}) }}">
+                                                                    <i class="icofont icofont-eye"></i>
+                                                                </a>
                                                             </div>
 
                                                         </div>

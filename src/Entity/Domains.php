@@ -57,24 +57,28 @@ class Domains
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="adminDomains")
+     * @ORM\JoinColumn(name="admin_manager_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank
      */
     private $adminManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="technicalDomains")
+     * @ORM\JoinColumn(name="technical_manager_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank
      */
     private $technicalManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="billingDomains")
+     * @ORM\JoinColumn(name="billing_manager_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank
      */
     private $billingManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="domains")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank
      */
     private $client;

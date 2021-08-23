@@ -90,6 +90,9 @@ class ServersController extends AbstractController {
     public function delete(Request $request, Servers $server): Response {
         if ($this->isCsrfTokenValid('delete' . $server->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            foreach($server->getProjects() as $project){
+                $entityManager->remove($project);
+            }
             $entityManager->remove($server);
             $entityManager->flush();
             $this->addFlash('success', $server->getName() . ' Successfuly deleted! ');

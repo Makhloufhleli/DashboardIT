@@ -34,12 +34,18 @@ class Clients
      */
     private $domains;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Hosts::class, mappedBy="client")
+     */
+    private $hosts;
+
   
 
     public function __construct()
     {
         $this->servers = new ArrayCollection();
         $this->domains = new ArrayCollection();
+        $this->hosts = new ArrayCollection();
     }
     
     public function __toString() {
@@ -118,6 +124,36 @@ class Clients
             // set the owning side to null (unless already changed)
             if ($domain->getClient() === $this) {
                 $domain->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Hosts[]
+     */
+    public function getHosts(): Collection
+    {
+        return $this->hosts;
+    }
+
+    public function addHost(Hosts $host): self
+    {
+        if (!$this->hosts->contains($host)) {
+            $this->hosts[] = $host;
+            $host->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHost(Hosts $host): self
+    {
+        if ($this->hosts->removeElement($host)) {
+            // set the owning side to null (unless already changed)
+            if ($host->getClient() === $this) {
+                $host->setClient(null);
             }
         }
 

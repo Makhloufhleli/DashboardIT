@@ -47,4 +47,14 @@ class CertificatesRepository extends ServiceEntityRepository
         ;
     }
     */
+    
+    public function findCertificateByDomainId($domainId): ?Certificates
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.domain = :val')
+            ->setParameter('val', $domainId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

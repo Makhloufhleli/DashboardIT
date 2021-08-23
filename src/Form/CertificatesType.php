@@ -61,6 +61,7 @@ class CertificatesType extends AbstractType {
                                 ->setParameter('val', false);
                     },
                 ])
+                ->add('sshKey')
         ;
     }
 

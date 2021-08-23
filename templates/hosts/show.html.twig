@@ -66,8 +66,11 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <ul>
+                                                                <li><strong>ID:</strong> {{ host.identifier }}</li>
                                                                 <li><strong>Host name:</strong> {{ host.name }}</li>
+                                                                <li><strong>Client:</strong> {{ host.client }}</li>
                                                                 <li><strong>CDN: </strong>{{ host.cdn }}</li>
+                                                                <li><strong>Subscription: </strong>{{ host.subscription }}</li>
                                                                 <li><strong>Certificate: </strong>
                                                                     {% if host.certificate != null %}
                                                                        <i class="fa fa-check text-success"></i>
@@ -92,6 +95,9 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <ul>
+                                                                <li><strong>Type:</strong> {{ host.type }}</li>
+                                                                <li><strong>Datacenter:</strong> {{ host.datacenter }}</li>
+                                                                <li><strong>Cluster:</strong> {{ host.cluster }}</li>
                                                                 <li><strong>PHP version:</strong> {{ host.phpVersion }}</li>
                                                                 <li><strong>Disc space:</strong> {{ host.discSpace }}</li>
                                                                 <li><strong>Web server:</strong> {{ host.apacheNginx }}</li>

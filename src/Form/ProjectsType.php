@@ -16,6 +16,8 @@ class ProjectsType extends AbstractType {
             ->add('name')
             ->add('server', EntityType::class, [
                 'class' => Servers::class,
+                'placeholder'=>'Choose Server',
+                'required'=>true,
             ])
         ;
     }

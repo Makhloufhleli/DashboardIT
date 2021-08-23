@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Repository\CertificatesRepository;
+
 /**
  * @Route("/domains")
  */
@@ -33,6 +35,7 @@ class DomainsController extends AbstractController
      */
     public function new(Request $request): Response{
         $domain = new Domains();
+        $domain->setRegistrAr("NameBay.com");
         $form = $this->createForm(DomainsType::class, $domain);
         $form->handleRequest($request);
 
@@ -84,10 +87,14 @@ class DomainsController extends AbstractController
     /**
      * @Route("/{id}", name="domains_delete", methods={"POST"})
      */
-    public function delete(Request $request, Domains $domain): Response
+    public function delete(Request $request, Domains $domain, CertificatesRepository $certificatesRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$domain->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $certificate = $certificatesRepository->findCertificateByDomainId($domain->getId());
+            if($certificate!=null){
+                $entityManager->remove($certificate);
+            }
             $entityManager->remove($domain);
             $entityManager->flush();
             $this->addFlash('success',$domain->getName().' Successfuly deleted! ');

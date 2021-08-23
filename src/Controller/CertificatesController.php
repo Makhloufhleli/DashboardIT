@@ -101,7 +101,12 @@ class CertificatesController extends AbstractController
     public function delete(Request $request, Certificates $certificate): Response
     {
         if ($this->isCsrfTokenValid('delete'.$certificate->getId(), $request->request->get('_token'))) {
-            $certificate->getDomain()->setHasCertificate(false);
+            if($certificate->getDomain() != null){
+                $certificate->getDomain()->setHasCertificate(false);
+            }
+            if($certificate->getHost()!= null){
+                $certificate->getHost()->setHasCertificate(false);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($certificate);
             $entityManager->flush();

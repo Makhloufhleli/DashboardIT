@@ -59,6 +59,12 @@ class Certificates
      */
     private $host;
 
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     */
+    private $sshKey;
+
 
     public function getId(): ?int
     {
@@ -143,6 +149,18 @@ class Certificates
     public function setHost(?Hosts $host): self
     {
         $this->host = $host;
+
+        return $this;
+    }
+
+    public function getSshKey(): ?string
+    {
+        return $this->sshKey;
+    }
+
+    public function setSshKey(string $sshKey): self
+    {
+        $this->sshKey = $sshKey;
 
         return $this;
     }

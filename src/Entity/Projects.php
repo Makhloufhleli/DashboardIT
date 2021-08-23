@@ -30,7 +30,7 @@ class Projects
     private $server;
 
     /**
-     * @ORM\OneToMany(targetEntity=Domains::class, mappedBy="project")
+     * @ORM\OneToMany(targetEntity=Domains::class, mappedBy="project", cascade={"persist", "remove"})
      */
     private $domains;
 

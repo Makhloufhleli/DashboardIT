@@ -56,14 +56,33 @@
                             <div class="j-wrapper j-wrapper-640">
                                 {{ form_start(form, {attr: {'class':'j-pro', 'novalidate':''}}) }}
                                 <div class="j-content">
-
                                     <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">ID</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.identifier) }}
+                                                <span class="j-tooltip j-tooltip-right-top">ID(Must bee nique)</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.identifier) }}</label>
+                                        </div>
                                         <div class="j-span6 j-unit">
                                             <label class="j-label">Name</label>
                                             <div class="j-input">
                                                 {{ form_widget(form.name) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Host name</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.name) }}</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Cluster</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.cluster) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Cluster</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.cluster) }}</label>
                                         </div>
                                         <div class="j-span6 j-unit">
                                             <label class="j-label">CDN</label>
@@ -71,6 +90,7 @@
                                                 {{ form_widget(form.cdn) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Content Delivery Netwok</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.cdn) }}</label>
                                         </div>
                                     </div>
                                     <div class="j-row">
@@ -80,6 +100,7 @@
                                                 {{ form_widget(form.phpVersion) }}
                                                 <span class="j-tooltip j-tooltip-right-top">PHP version</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.phpVersion) }}</label>
                                         </div>
                                         <div class="j-span4 j-unit">
                                             <label class="j-label">Disc space</label>
@@ -87,13 +108,33 @@
                                                 {{ form_widget(form.discSpace) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Disc space</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.discSpace) }}</label>
                                         </div>
                                         <div class="j-span4 j-unit">
-                                            <label class="j-label">Web server</label>
+                                            <label class="j-label">Type</label>
                                             <div class="j-input">
-                                                {{ form_widget(form.apache_nginx) }}
-                                                <span class="j-tooltip j-tooltip-right-top">Web server</span>
+                                                {{ form_widget(form.type) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Type</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.type) }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Data center</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.datacenter) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Data center</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.datacenter) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Subscription</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.subscription) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Subscription</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.subscription) }}</label>
                                         </div>
                                     </div>
 
@@ -155,12 +196,32 @@
                                     </div>
                                     <div class="j-divider j-gap-bottom-25"></div>
                                     <div class="j-row">
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Web server</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.apache_nginx) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Web server</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.apache_nginx) }}</label>
+                                        </div>
+                                        <div class="j-span6 j-unit">
+                                            <label class="j-label">Client</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.client) }}
+                                                <span class="j-tooltip j-tooltip-right-top">Client</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.client) }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="j-divider j-gap-bottom-25"></div>
+                                    <div class="j-row">
                                         <div class="j-span4 j-unit">
                                             <label class="j-label">Admin</label>
                                             <div class="j-input">
                                                 {{ form_widget(form.adminManager) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Administration manager</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.adminManager) }}</label>
                                         </div>
                                         <div class="j-span4 j-unit">
                                             <label class="j-label">Technical manager</label>
@@ -168,6 +229,7 @@
                                                 {{ form_widget(form.technicalManager) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Technical administration manager</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.technicalManager) }}</label>
                                         </div>
                                         <div class="j-span4 j-unit">
                                             <label class="j-label">Billing manager</label>
@@ -175,6 +237,7 @@
                                                 {{ form_widget(form.billingManager) }}
                                                 <span class="j-tooltip j-tooltip-right-top">Billing dministration manager</span>
                                             </div>
+                                            <label class="text-danger error">{{ form_errors(form.billingManager) }}</label>
                                         </div>
                                     </div>
 

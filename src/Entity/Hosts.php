@@ -7,8 +7,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass=HostsRepository::class)
+ * @UniqueEntity(
+ *     fields={"identifier"},
+ *     message="This id is already in use, try with an other one!"
+ * )
  */
 class Hosts
 {
@@ -95,6 +101,41 @@ class Hosts
      * @ORM\OneToOne(targetEntity=Certificates::class, mappedBy="host", cascade={"persist", "remove"})
      */
     private $certificate;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $cluster;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $datacenter;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $subscription;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $identifier;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="hosts")
+     * @Assert\NotBlank()
+     */
+    private $client;
 
     
 
@@ -269,6 +310,78 @@ class Hosts
         }
 
         $this->certificate = $certificate;
+
+        return $this;
+    }
+
+    public function getCluster(): ?string
+    {
+        return $this->cluster;
+    }
+
+    public function setCluster(string $cluster): self
+    {
+        $this->cluster = $cluster;
+
+        return $this;
+    }
+
+    public function getDatacenter(): ?string
+    {
+        return $this->datacenter;
+    }
+
+    public function setDatacenter(string $datacenter): self
+    {
+        $this->datacenter = $datacenter;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?string
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(string $subscription): self
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
+
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(string $identifier): self
+    {
+        $this->identifier = $identifier;
+
+        return $this;
+    }
+
+    public function getClient(): ?Clients
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Clients $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

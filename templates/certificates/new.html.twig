@@ -146,6 +146,16 @@
                                             <label class="text-danger error">{{ form_errors(form.issuer) }}</label>
                                         </div>
                                     </div>
+                                    <div class="j-row">
+                                        <div class="j-span12 j-unit">
+                                            <label class="j-label">SSH key</label>
+                                            <div class="j-input">
+                                                {{ form_widget(form.sshKey) }}
+                                                <span class="j-tooltip j-tooltip-right-top">SSH Key</span>
+                                            </div>
+                                            <label class="text-danger error">{{ form_errors(form.sshKey) }}</label>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="j-footer">

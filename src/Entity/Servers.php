@@ -33,18 +33,21 @@ class Servers
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="adminServers")
+     * @ORM\JoinColumn(name="admin_manager_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank
      */
     private $adminManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="technicalServers")
+     * @ORM\JoinColumn(name="technical_manager_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank
      */
     private $technicalManager;
 
     /**
      * @ORM\ManyToOne(targetEntity=AccountsManagers::class, inversedBy="billingServers")
+     * @ORM\JoinColumn(name="billing_manager_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank
      */
     private $billingManager;
@@ -134,6 +137,7 @@ class Servers
 
     /**
      * @ORM\ManyToOne(targetEntity=Clients::class, inversedBy="servers")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank
      */
     private $client;
