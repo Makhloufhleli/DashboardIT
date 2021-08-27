@@ -67,10 +67,16 @@
                                                         <div class="col-lg-12">
                                                             <ul>
                                                                 {% if certificate.domain != null %}
-                                                                    <li><strong>Domain: </strong>{{ certificate.domain.name }}</li>
+                                                                    <li>
+                                                                        <strong>Domain: </strong>
+                                                                        <a href="{{ path('domains_show', {'id': certificate.domain.id}) }}">{{ certificate.domain.name }}</a>
+                                                                    </li>
                                                                 {% endif %}
                                                                 {% if certificate.host != null %}
-                                                                    <li><strong>Host: </strong>{{ certificate.host.name }}</li>
+                                                                    <li>
+                                                                        <strong>Host: </strong>
+                                                                        <a href="{{ path('hosts_show', {'id': certificate.host.id}) }}">{{ certificate.host.name }}</a>
+                                                                    </li>
                                                                 {% endif %}
                                                                 <li><strong>Renewal mode:</strong> 
                                                                     {% if certificate.renewalMode == 'auto' %}

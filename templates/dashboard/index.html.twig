@@ -50,7 +50,13 @@
                                 <ul class="scroll-list cards">
                                     {% for certificate in certificates %}
                                             <li>
-                                               <a href="{{ path('certificates_show', {'id': certificate.id}) }}"> <h6>{{ certificate.id }}</h6></a>
+                                               <a href="{{ path('certificates_show', {'id': certificate.id}) }}">
+                                                    {% if certificate.domain != null %}
+                                                       <h6>{{ certificate.domain.name }}</h6><small class="text-info f-right">domain</small>
+                                                    {% elseif certificate.host != null %}
+                                                        <h6>{{ certificate.host.name }}</h6><small class="text-info f-right">host</small>
+                                                    {% endif %}
+                                               </a>
                                             </li>
                                     {% endfor %}
                                     {% if certificates.empty %}
